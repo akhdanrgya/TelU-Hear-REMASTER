@@ -42,4 +42,22 @@ public class LayoutController implements Initializable {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
+
+    public void musicButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/music.fxml"));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
+
+    public void playlistButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/playlist.fxml"));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
+
+    public void premiumButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/premium.fxml"));
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(fxml);
+    }
 }
