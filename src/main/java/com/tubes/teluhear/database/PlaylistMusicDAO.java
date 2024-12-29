@@ -20,14 +20,18 @@ public class PlaylistMusicDAO {
         List<PlaylistMusicModel> playlistMusicList = new ArrayList<>();
         String sql = "SELECT * FROM playlist_music WHERE playlist_id = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                PlaylistMusicModel playlistMusic = new PlaylistMusicModel(
-                        rs.getInt("id"),
-                        rs.getInt("id_playlist"),
-                        rs.getInt("id_music")
-                );
-                playlistMusicList.add(playlistMusic);
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, playlist_id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    PlaylistMusicModel playlistMusic = new PlaylistMusicModel(
+                            rs.getInt("id"),
+                            rs.getInt("playlist_id"),
+                            rs.getInt("id_music")
+                    );
+                    playlistMusicList.add(playlistMusic);
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -35,6 +39,7 @@ public class PlaylistMusicDAO {
 
         return playlistMusicList;
     }
+
 
     public boolean addPlaylistMusic(PlaylistMusicModel playlistMusic) {
         String sql = "INSERT INTO playlist_music (id_playlist, id_music) VALUES (?, ?)";
