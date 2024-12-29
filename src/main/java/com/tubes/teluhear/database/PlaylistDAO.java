@@ -32,4 +32,29 @@ public class PlaylistDAO {
 
         return playlistList;
     }
+
+    public boolean addPlaylist(PlaylistModel playlist) {
+        String sql = "INSERT INTO playlist (id_user, playlist_name, image) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, playlist.getUser_id());
+            stmt.setString(2, playlist.getPlaylist_name());
+            stmt.setString(3, playlist.getImage());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error adding playlist: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean deletePlaylist(int id) {
+        String sql = "DELETE FROM playlist WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error deleting playlist: " + e.getMessage());
+            return false;
+        }
+    }
+
 }
