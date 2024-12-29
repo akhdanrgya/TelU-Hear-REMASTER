@@ -1,43 +1,43 @@
 package com.tubes.teluhear;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import com.tubes.teluhear.database.MusicModel;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+public class MusicCardController {
 
-public class MusicCardController implements Initializable {
+    private MusicModel music;
 
-    @FXML
-    private Label musicArtist;
+    // Inisialisasi elemen UI
+    private VBox musicCardView;
+    private Label titleLabel;
+    private Label artistLabel;
+    private Label genreLabel;
+    private Label durationLabel;
 
-    @FXML
-    private Label musicIndex;
+    public MusicCardController() {
+        // Buat elemen UI
+        titleLabel = new Label();
+        artistLabel = new Label();
+        genreLabel = new Label();
+        durationLabel = new Label();
 
-    @FXML
-    private Label musicJudul;
-
-    private MusicModel musicModel;
-
-
-    public void initialize (URL location, ResourceBundle resources){
-        try {
-            System.out.println("card load banget");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Gabungkan elemen-elemen tersebut dalam VBox
+        musicCardView = new VBox(titleLabel, artistLabel, genreLabel, durationLabel);
     }
 
-    public void setMusicData(MusicModel musicModel){
-        this.musicModel = musicModel;
+    // Set data musik ke label
+    public void setMusicData(MusicModel music) {
+        this.music = music;
 
-        musicJudul.setText(musicModel.getJudul());
-        musicArtist.setText(musicModel.getArtist());
+        titleLabel.setText("Title: " + music.getJudul());
+        artistLabel.setText("Artist: " + music.getArtist());
+        genreLabel.setText("Genre: " + music.getGenre());
+        durationLabel.setText("Duration: " + music.getDuration());
+    }
 
-        String id = String.valueOf(musicModel.getId());
-        musicIndex.setText(id);
-
+    // Mengembalikan view dari MusicCard
+    public VBox getView() {
+        return musicCardView;
     }
 }
