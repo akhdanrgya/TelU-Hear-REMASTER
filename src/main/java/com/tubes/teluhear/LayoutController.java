@@ -1,7 +1,8 @@
-package com.tubes.teluhear.controller;
+package com.tubes.teluhear;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +14,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class LayoutController {
+public class LayoutController implements Initializable {
     @FXML
     private Label welcomeText;
 
@@ -26,7 +27,7 @@ public class LayoutController {
     public void initialize (URL location, ResourceBundle resources){
 
         try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("home.fxml"));
+            Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/home.fxml"));
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
 
@@ -37,7 +38,7 @@ public class LayoutController {
     }
 
     public void homeButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("layout.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/home.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
