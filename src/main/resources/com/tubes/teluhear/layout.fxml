@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -31,6 +33,23 @@
          </center>
          <top>
             <AnchorPane prefHeight="100.0" prefWidth="955.0" BorderPane.alignment="CENTER" />
-         </top></BorderPane>
+         </top>
+         <bottom>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="MusicPlay" alignment="CENTER" prefHeight="100.0" prefWidth="201.0">
+                     <children>
+                        <Label fx:id="playedJudul" text="Judul" />
+                        <Label fx:id="playedArtist" text="Artist" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="500.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </bottom></BorderPane>
    </children>
 </AnchorPane>
