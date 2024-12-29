@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.geometry.Insets;
 
 public class PlaylistController implements Initializable {
 
@@ -48,8 +49,8 @@ public class PlaylistController implements Initializable {
                 PlaylistCardController controller = loader.getController();
                 controller.setPlaylistData(playlist);
 
-                // Menambahkan playlistCardView ke grid
                 playlistGrid.add(playlistCardView, column, row);
+                playlistGrid.setMargin(playlistCardView, new Insets(10));
 
                 // Update kolom dan baris
                 column++;

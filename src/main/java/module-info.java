@@ -12,6 +12,7 @@ module com.tubes.teluhear {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires mysql.connector.j;
+    requires java.desktop;
 
     opens com.tubes.teluhear to javafx.fxml;
     exports com.tubes.teluhear;
