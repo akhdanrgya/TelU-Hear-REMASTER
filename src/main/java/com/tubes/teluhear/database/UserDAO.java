@@ -13,12 +13,13 @@ public class UserDAO {
     }
 
     public boolean login(String username, String password) {
-        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)){
             stmt.setString(1, username);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
+            System.out.println( "Login success!");
             return rs.next();
         } catch (SQLException e) {
             System.out.println( "Login failed: " + e.getMessage());
@@ -27,7 +28,7 @@ public class UserDAO {
     }
 
     public void register(UserModel user) {
-        String sql = "INSERT INTO user (username, password, role) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)){
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
@@ -37,6 +38,4 @@ public class UserDAO {
             System.out.println("Register failed: " + e.getMessage());
         }
     }
-
-
 }
