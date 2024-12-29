@@ -10,6 +10,7 @@ module com.tubes.teluhear {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens com.tubes.teluhear to javafx.fxml;
     exports com.tubes.teluhear;
