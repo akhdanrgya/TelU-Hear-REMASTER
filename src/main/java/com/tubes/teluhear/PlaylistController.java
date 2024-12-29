@@ -35,6 +35,9 @@ public class PlaylistController implements Initializable {
             return;
         }
 
+        int column = 0;
+        int row = 0;
+
         for (int i = 0; i < playlistModelList.size(); i++) {
             PlaylistModel playlist = playlistModelList.get(i);
 
@@ -45,11 +48,20 @@ public class PlaylistController implements Initializable {
                 PlaylistCardController controller = loader.getController();
                 controller.setPlaylistData(playlist);
 
-                playlistGrid.add(playlistCardView, 0, i);
+                // Menambahkan playlistCardView ke grid
+                playlistGrid.add(playlistCardView, column, row);
+
+                // Update kolom dan baris
+                column++;
+                if (column >= 3) {
+                    column = 0;
+                    row++;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
 }

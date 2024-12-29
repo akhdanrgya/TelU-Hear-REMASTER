@@ -21,13 +21,10 @@ public class HelloController {
         this.UserDAO = new UserDAO(dbConnection.getConnection());
         this.MusicDAO = new MusicDAO(dbConnection.getConnection());
         this.PlaylistDAO = new PlaylistDAO(dbConnection.getConnection());
-        System.out.println("Init");
     }
 
     @FXML
     protected void onHelloButtonClick() throws SQLException {
         welcomeText.setText("Welcome to JavaFX Application!");
-
-
     }
 }
