@@ -1,14 +1,16 @@
 package com.tubes.teluhear.database;
 
 public class PlaylistModel {
+    private int id;
     private int user_id;
     private String playlist_name;
     private String image;
 
-    public PlaylistModel(int user_id, String playlist_name, String image) {
+    public PlaylistModel(int user_id, String playlist_name, String image, int id) {
         this.user_id = user_id;
         this.playlist_name = playlist_name;
         this.image = image;
+        this.id = id;
     }
 
     public int getUser_id() {
@@ -35,11 +37,22 @@ public class PlaylistModel {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "PlaylistModel{" + "user_id=" + user_id + ", playlist_name=" + playlist_name + ", image=" + image + '}';
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "PlaylistModel{" +
+                "user_id=" + user_id +
+                ", playlist_name='" + playlist_name + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 
 
 }

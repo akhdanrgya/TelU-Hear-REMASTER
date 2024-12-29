@@ -22,7 +22,8 @@ public class PlaylistDAO {
                 PlaylistModel playlist = new PlaylistModel(
                         rs.getInt("id_user"),
                         rs.getString("playlist_name"),
-                        rs.getString("image")
+                        rs.getString("image"),
+                        rs.getInt("id")
                 );
                 playlistList.add(playlist);
             }
@@ -56,5 +57,29 @@ public class PlaylistDAO {
             return false;
         }
     }
+
+    public List<PlaylistModel> getPlaylistByUser(int userId) {
+        List<PlaylistModel> playlistList = new ArrayList<>();
+        String sql = "SELECT * FROM playlist WHERE id_user = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    PlaylistModel playlist = new PlaylistModel(
+                            rs.getInt("id_user"),
+                            rs.getString("playlist_name"),
+                            rs.getString("image"),
+                            rs.getInt("id")
+                    );
+                    playlistList.add(playlist);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching playlists by user: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return playlistList;
+    }
+
 
 }

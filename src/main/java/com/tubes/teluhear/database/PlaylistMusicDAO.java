@@ -1,7 +1,5 @@
 package com.tubes.teluhear.database;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +16,7 @@ public class PlaylistMusicDAO {
 
     public List<PlaylistMusicModel> getPlaylistMusic(int playlist_id) {
         List<PlaylistMusicModel> playlistMusicList = new ArrayList<>();
-        String sql = "SELECT * FROM playlist_music WHERE playlist_id = ?";
+        String sql = "SELECT * FROM playlist_music WHERE id_playlist = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, playlist_id);
@@ -27,7 +25,7 @@ public class PlaylistMusicDAO {
                 while (rs.next()) {
                     PlaylistMusicModel playlistMusic = new PlaylistMusicModel(
                             rs.getInt("id"),
-                            rs.getInt("playlist_id"),
+                            rs.getInt("id_playlist"),
                             rs.getInt("id_music")
                     );
                     playlistMusicList.add(playlistMusic);
