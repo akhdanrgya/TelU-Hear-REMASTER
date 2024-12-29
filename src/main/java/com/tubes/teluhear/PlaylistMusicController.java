@@ -1,13 +1,16 @@
 package com.tubes.teluhear;
 
-import com.tubes.teluhear.database.PlaylistMusicDAO;
-import com.tubes.teluhear.database.PlaylistMusicModel;
-import com.tubes.teluhear.database.dbConnection;
+import com.tubes.teluhear.database.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,52 +19,72 @@ public class PlaylistMusicController implements Initializable {
     @FXML
     private ListView<String> playlistMusicListView;
 
+    @FXML
+    private GridPane playlistMusicGrid;
+
     private int playlistId;
 
     private PlaylistMusicDAO playlistMusicDAO;
 
+    private MusicDAO musicDAO;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Debugging untuk memastikan ListView terhubung dengan benar
+
         System.out.println("Is playlistMusicListView null in initialize? " + (playlistMusicListView == null));
 
-        // Inisialisasi DAO
+
         playlistMusicDAO = new PlaylistMusicDAO(dbConnection.getConnection());
+        musicDAO = new MusicDAO(dbConnection.getConnection());
     }
 
     public void setPlaylistId(int playlistId) {
         this.playlistId = playlistId;
 
-        // Cek apakah ListView sudah terhubung
-//        if (playlistMusicListView == null) {
-//            System.out.println("playlistMusicListView is null in setPlaylistId!");
-//            return;
-//        }
-
         System.out.println("Setting Playlist ID: " + playlistId);
 
-        // Ambil data musik dari DAO
         List<PlaylistMusicModel> playlistMusicList = playlistMusicDAO.getPlaylistMusic(playlistId);
 
-        // Panggil metode untuk mengisi ListView dengan data musik
-        populatePlaylistMusicList(playlistMusicList);
+        List<MusicModel> musicList = musicDAO.getMusicByIds(getMusicIdsFromPlaylist(playlistMusicList));
+
+        populatePlaylistMusicListID(musicList);
     }
 
-    private void populatePlaylistMusicList(List<PlaylistMusicModel> playlistMusicList) {
-        // Clear items sebelumnya
-//        playlistMusicListView.getItems().clear();
+    private List<Integer> getMusicIdsFromPlaylist(List<PlaylistMusicModel> playlistMusicList) {
+        List<Integer> musicIds = new ArrayList<>();
 
-        // Jika data musik kosong, tampilkan pesan
-        if (playlistMusicList == null || playlistMusicList.isEmpty()) {
+        for (PlaylistMusicModel music : playlistMusicList) {
+            musicIds.add(music.getIdMusic());
+        }
+
+        return musicIds;
+    }
+
+    private void populatePlaylistMusicListID(List<MusicModel> musicList) {
+        if (musicList == null || musicList.isEmpty()) {
             System.out.println("No music found in this playlist.");
-//            playlistMusicListView.getItems().add("No music found in this playlist.");
             return;
         }
 
-        // Menambahkan data musik ke ListView
-        for (PlaylistMusicModel music : playlistMusicList) {
-            System.out.println("Music ID: " + music.getIdMusic());  // Debugging
-//            playlistMusicListView.getItems().add("Music ID: " + music.getIdMusic());
+        for (MusicModel music : musicList) {
+            System.out.println("Music ID: " + music.getJudul());
+        }
+
+        for (int i = 0; i < musicList.size(); i++) {
+            MusicModel music = musicList.get(i);
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/MusicCard.fxml"));
+                Pane musicCardView = loader.load();
+
+                MusicCardController controller = loader.getController();
+                controller.setMusicData(music, i + 1);
+
+                playlistMusicGrid.add(musicCardView, 0, i);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 }

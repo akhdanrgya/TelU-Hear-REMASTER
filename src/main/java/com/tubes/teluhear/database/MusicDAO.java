@@ -35,4 +35,47 @@ public class MusicDAO {
         System.out.println(musicList);
         return musicList;
     }
+
+    public List<MusicModel> getMusicByIds(List<Integer> ids) {
+        List<MusicModel> musicList = new ArrayList<>();
+
+        // Membuat query dengan placeholder sesuai jumlah ID
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM music WHERE id IN (");
+        for (int i = 0; i < ids.size(); i++) {
+            queryBuilder.append("?");
+            if (i < ids.size() - 1) {
+                queryBuilder.append(", ");
+            }
+        }
+        queryBuilder.append(")");
+
+        String query = queryBuilder.toString();
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            // Menetapkan nilai untuk setiap placeholder
+            for (int i = 0; i < ids.size(); i++) {
+                stmt.setInt(i + 1, ids.get(i));
+            }
+
+            // Menjalankan query
+            ResultSet resultSet = stmt.executeQuery();
+
+            // Menambahkan hasil ke dalam list
+            while (resultSet.next()) {
+                MusicModel music = new MusicModel(
+                        resultSet.getInt("id"),
+                        resultSet.getString("judul"),
+                        resultSet.getString("artist"),
+                        resultSet.getString("genre"),
+                        resultSet.getString("duration")
+                );
+                musicList.add(music);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return musicList;
+    }
 }
