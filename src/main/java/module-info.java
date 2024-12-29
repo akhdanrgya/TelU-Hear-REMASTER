@@ -11,6 +11,7 @@ module com.tubes.teluhear {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires mysql.connector.j;
 
     opens com.tubes.teluhear to javafx.fxml;
     exports com.tubes.teluhear;

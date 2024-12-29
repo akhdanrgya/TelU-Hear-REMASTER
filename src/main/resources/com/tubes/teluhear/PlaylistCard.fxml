@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistCardController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="250.0" spacing="20.0">
+         <children>
+            <ImageView fx:id="imagePlaylist" fitHeight="150.0" fitWidth="250.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../image/plus.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="judulPlaylist" text="Judul Playlist" />
+         </children>
+      </VBox>
+   </children>
+</Pane>

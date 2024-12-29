@@ -6,13 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import com.tubes.teluhear.database.MusicModel;
-import com.tubes.teluhear.MusicCardController;
 import com.tubes.teluhear.database.MusicDAO;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,20 +23,10 @@ public class MusicController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Pastikan koneksi berhasil
-//        Connection connection = dbConnection.getConnection();
-//        if (connection == null) {
-//            System.err.println("Koneksi gagal!");
-//            return;
-//        }
-
-        // Inisialisasi MusicDAO dengan koneksi
         musicDAO = new MusicDAO(dbConnection.getConnection());
 
-        // Ambil data musik
         List<MusicModel> musicDataList = musicDAO.getAllMusic();
 
-        // Populasi GridPane dengan data musik
         populateMusicGrid(musicDataList);
 
         System.out.println("MusicController initialized.");
@@ -54,16 +42,13 @@ public class MusicController implements Initializable {
             MusicModel music = musicDataList.get(i);
 
             try {
-                // Load MusicCard.fxml
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/MusicCard.fxml"));
                 Pane musicCardView = loader.load();
 
-                // Ambil controller dan set data musik
                 MusicCardController controller = loader.getController();
                 controller.setMusicData(music, i+1);
 
-                // Tambahkan MusicCard ke GridPane
-                musicGrid.add(musicCardView, 0, i); // Kolom per baris: 3
+                musicGrid.add(musicCardView, 0, i);
             } catch (IOException e) {
                 e.printStackTrace();
             }

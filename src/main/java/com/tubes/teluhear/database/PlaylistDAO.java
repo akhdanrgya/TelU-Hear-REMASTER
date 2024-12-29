@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistDAO {
-    private final Connection connection;
+    private Connection connection;
 
     public PlaylistDAO(Connection connection) {
         this.connection = connection;
     }
 
-    public List<PlaylistModel> getPlaylist() throws SQLException {
+    public List<PlaylistModel> getPlaylist() {
         List<PlaylistModel> playlistList = new ArrayList<>();
         String sql = "SELECT * FROM playlist";
         try (PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
