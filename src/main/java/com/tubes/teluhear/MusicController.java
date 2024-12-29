@@ -2,12 +2,15 @@ package com.tubes.teluhear;
 
 import com.tubes.teluhear.database.dbConnection;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import com.tubes.teluhear.database.MusicModel;
 import com.tubes.teluhear.MusicCardController;
 import com.tubes.teluhear.database.MusicDAO;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.List;
@@ -50,14 +53,22 @@ public class MusicController implements Initializable {
         for (int i = 0; i < musicDataList.size(); i++) {
             MusicModel music = musicDataList.get(i);
 
-            // Buat MusicCardController untuk setiap musik
-            MusicCardController musicCard = new MusicCardController();
-            musicCard.setMusicData(music);
+            try {
+                // Load MusicCard.fxml
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/MusicCard.fxml"));
+                Pane musicCardView = loader.load();
 
-            System.out.println(music);
+                // Ambil controller dan set data musik
+                MusicCardController controller = loader.getController();
+                controller.setMusicData(music, i+1);
 
-            // Tambahkan MusicCard ke GridPane
-            musicGrid.add(musicCard.getView(), i % 3, i / 3);
+                // Tambahkan MusicCard ke GridPane
+                musicGrid.add(musicCardView, 0, i); // Kolom per baris: 3
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+
 }
