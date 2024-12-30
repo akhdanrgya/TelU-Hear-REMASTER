@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -13,8 +14,14 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </GridPane>
          </content>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
       </ScrollPane>
    </children>
 </StackPane>

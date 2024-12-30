@@ -1,5 +1,6 @@
 package com.tubes.teluhear;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +15,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.tubes.teluhear.database.MusicModel;
+
 public class LayoutController implements Initializable {
     @FXML
     private Label welcomeText;
@@ -23,6 +26,9 @@ public class LayoutController implements Initializable {
 
     @FXML
     private Button homeButton, musicButton, playlistButton, premiumButton;
+
+    @FXML
+    private Label playedJudul, playedArtist;
 
     public void initialize (URL location, ResourceBundle resources){
 
@@ -60,4 +66,22 @@ public class LayoutController implements Initializable {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
+
+    public void setPlayedMusic(MusicModel played) {
+
+        Platform.runLater(() -> {
+            System.out.println("Setting music: " + played.getJudul() + " by " + played.getArtist());
+            System.out.println("Before setting text: " + playedJudul.getText() + " / " + playedArtist.getText());
+            playedJudul.setText(played.getJudul());
+            playedArtist.setText(played.getArtist());
+            System.out.println("After setting text: " + playedJudul.getText() + " / " + playedArtist.getText());
+            homeButton.setVisible(true);
+        });
+
+
+    }
+
+
+
+
 }
