@@ -15,7 +15,6 @@ public class PremiumController implements Initializable {
 
     private int idUser;
     private String role;
-
     private SubsDAO subsDAO;
 
     @FXML

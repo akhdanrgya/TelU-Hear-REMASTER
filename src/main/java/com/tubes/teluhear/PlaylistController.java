@@ -3,6 +3,7 @@ package com.tubes.teluhear;
 import com.tubes.teluhear.database.PlaylistDAO;
 import com.tubes.teluhear.database.PlaylistModel;
 import com.tubes.teluhear.database.dbConnection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -69,4 +70,7 @@ public class PlaylistController implements Initializable {
     }
 
 
+    public void addPlaylist(ActionEvent actionEvent) {
+        System.out.println("Add Playlist");
+    }
 }
