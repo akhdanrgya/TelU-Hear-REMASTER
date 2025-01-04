@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -15,6 +17,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
+import javafx.stage.Stage;
 
 public class PlaylistController implements Initializable {
 
@@ -57,7 +60,6 @@ public class PlaylistController implements Initializable {
                 playlistGrid.add(playlistCardView, column, row);
                 playlistGrid.setMargin(playlistCardView, new Insets(10));
 
-                // Update kolom dan baris
                 column++;
                 if (column >= 3) {
                     column = 0;
@@ -72,5 +74,21 @@ public class PlaylistController implements Initializable {
 
     public void addPlaylist(ActionEvent actionEvent) {
         System.out.println("Add Playlist");
+        goToForm();
+
+    }
+
+    private void goToForm(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/addPlaylistForm.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Add Playlist");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
