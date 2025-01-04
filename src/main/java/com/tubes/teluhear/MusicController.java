@@ -85,21 +85,39 @@ public class MusicController implements Initializable {
     @FXML
     void playButton(ActionEvent event) {
         if (currentMusic != null) {
-            System.out.println("Playing: " + currentMusic.getFile_path());
-            judulBawah.setText(currentMusic.getJudul());
 
             if (mediaPlayer != null) {
                 mediaPlayer.stop();
+                mediaPlayer.dispose();
             }
 
-            Media media = new Media(new File(currentMusic.getFile_path()).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
+            File file = new File(currentMusic.getFile_path());
+            if (file.exists()) {
+                System.out.println("Playing: " + currentMusic.getFile_path());
+                judulBawah.setText(currentMusic.getJudul());
+                Media media = new Media(file.toURI().toString());
+                mediaPlayer = new MediaPlayer(media);
+            } else {
+                URL resource = getClass().getResource("/" + currentMusic.getFile_path());
+                if (resource != null) {
+                    Media media = new Media(resource.toExternalForm());
+                    mediaPlayer = new MediaPlayer(media);
+                } else {
+                    System.out.println("Resource not found: " + currentMusic.getFile_path());
+                }
+            }
 
-            mediaPlayer.play();
+            if (mediaPlayer != null) {
+                mediaPlayer.play();
+            } else {
+                System.out.println("Failed to initialize mediaPlayer.");
+            }
+
         } else {
             System.out.println("No music selected");
         }
     }
+
 
     @FXML
     void nextButton(ActionEvent event) {
