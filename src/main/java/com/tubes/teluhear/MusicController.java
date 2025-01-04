@@ -4,6 +4,7 @@ import com.tubes.teluhear.database.dbConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
@@ -25,14 +26,16 @@ public class MusicController implements Initializable {
     @FXML
     private GridPane musicGrid;
 
-    private MusicDAO musicDAO;
-
     @FXML
     private Slider musicSlider;
 
     @FXML
     private Label judulBawah;
 
+    @FXML
+    private Button pauseText;
+
+    private MusicDAO musicDAO;
     private MusicModel currentMusic;
     private MediaPlayer mediaPlayer;
 
@@ -67,7 +70,7 @@ public class MusicController implements Initializable {
                     @Override
                     public void onMusicCardClicked(MusicModel music) {
                         setCurrentMusic(music);
-                        playButton(null);
+                        playButton();
                     }
                 });
 
@@ -82,8 +85,7 @@ public class MusicController implements Initializable {
         this.currentMusic = music;
     }
 
-    @FXML
-    void playButton(ActionEvent event) {
+    void playButton() {
         if (currentMusic != null) {
 
             if (mediaPlayer != null) {
@@ -100,6 +102,7 @@ public class MusicController implements Initializable {
                 if (resource != null) {
                     System.out.println("Playing: " + currentMusic.getFile_path());
                     judulBawah.setText(currentMusic.getJudul());
+                    pauseText.setText("Pause");
                     Media media = new Media(resource.toExternalForm());
                     mediaPlayer = new MediaPlayer(media);
                 } else {
@@ -115,6 +118,20 @@ public class MusicController implements Initializable {
 
         } else {
             judulBawah.setText("No music selected");
+        }
+    }
+
+
+    @FXML
+    void pauseButton(ActionEvent event) {
+        if (mediaPlayer != null) {
+            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+                mediaPlayer.pause();
+                pauseText.setText("Play");
+            } else if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
+                mediaPlayer.play();
+                pauseText.setText("Pause");
+            }
         }
     }
 
@@ -136,4 +153,6 @@ public class MusicController implements Initializable {
             System.out.println("No music selected");
         }
     }
+
+
 }

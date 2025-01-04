@@ -41,7 +41,7 @@
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="600.0" spacing="10.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#previousButton" text="Previous" />
-                        <Button mnemonicParsing="false" onAction="#playButton" text="Play" />
+                        <Button fx:id="pauseText" mnemonicParsing="false" onAction="#pauseButton" text="Play" />
                         <Button mnemonicParsing="false" onAction="#nextButton" text="Next" />
                      </children>
                   </HBox>
