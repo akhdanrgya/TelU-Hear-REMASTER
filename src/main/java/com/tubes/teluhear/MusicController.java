@@ -26,6 +26,8 @@ public class MusicController implements Initializable {
     @FXML
     private Slider musicSlider;
 
+    private MusicModel currentMusic; // Menyimpan musik yang dipilih
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         musicDAO = new MusicDAO(dbConnection.getConnection());
@@ -53,6 +55,14 @@ public class MusicController implements Initializable {
                 MusicCardController controller = loader.getController();
                 controller.setMusicData(music, i+1);
 
+                // Set listener untuk menangkap musik yang dipilih
+                controller.setClickListener(new MusicCardClickListener() {
+                    @Override
+                    public void onMusicCardClicked(MusicModel music) {
+                        setCurrentMusic(music); // Set musik yang dipilih
+                    }
+                });
+
                 musicGrid.add(musicCardView, 0, i);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,9 +70,18 @@ public class MusicController implements Initializable {
         }
     }
 
+
+    public void setCurrentMusic(MusicModel music) {
+        this.currentMusic = music;
+    }
+
     @FXML
     void playButton(ActionEvent event) {
-        System.out.println("playButton clicked");
+        if (currentMusic != null) {
+            System.out.println("Playing: " + currentMusic.getFile_path());
+        } else {
+            System.out.println("No music selected");
+        }
     }
 
     @FXML

@@ -29,6 +29,8 @@ public class MusicCardController implements Initializable {
 
     private MusicModel musicData;
 
+    private MusicCardClickListener clickListener;
+
     private MusicDAO musicDAO;
 
     @Override
@@ -43,9 +45,18 @@ public class MusicCardController implements Initializable {
         musicArtist.setText(music.getArtist());
     }
 
+    // Set listener untuk mendengarkan klik
+    public void setClickListener(MusicCardClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     @FXML
     private void onCardClicked(MouseEvent event) {
-        musicDAO.PlayMusic(musicData.getJudul());
+        if (clickListener != null) {
+            clickListener.onMusicCardClicked(musicData);
+        }
+
     }
 }
+
 
