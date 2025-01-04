@@ -4,13 +4,17 @@ import com.tubes.teluhear.database.dbConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import com.tubes.teluhear.database.MusicModel;
 import com.tubes.teluhear.database.MusicDAO;
 import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -26,7 +30,11 @@ public class MusicController implements Initializable {
     @FXML
     private Slider musicSlider;
 
-    private MusicModel currentMusic; // Menyimpan musik yang dipilih
+    @FXML
+    private Label judulBawah;
+
+    private MusicModel currentMusic;
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,13 +61,13 @@ public class MusicController implements Initializable {
                 Pane musicCardView = loader.load();
 
                 MusicCardController controller = loader.getController();
-                controller.setMusicData(music, i+1);
+                controller.setMusicData(music, i + 1);
 
-                // Set listener untuk menangkap musik yang dipilih
                 controller.setClickListener(new MusicCardClickListener() {
                     @Override
                     public void onMusicCardClicked(MusicModel music) {
-                        setCurrentMusic(music); // Set musik yang dipilih
+                        setCurrentMusic(music);
+                        playButton(null);
                     }
                 });
 
@@ -70,7 +78,6 @@ public class MusicController implements Initializable {
         }
     }
 
-
     public void setCurrentMusic(MusicModel music) {
         this.currentMusic = music;
     }
@@ -79,6 +86,16 @@ public class MusicController implements Initializable {
     void playButton(ActionEvent event) {
         if (currentMusic != null) {
             System.out.println("Playing: " + currentMusic.getFile_path());
+            judulBawah.setText(currentMusic.getJudul());
+
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+            }
+
+            Media media = new Media(new File(currentMusic.getFile_path()).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            mediaPlayer.play();
         } else {
             System.out.println("No music selected");
         }
@@ -86,12 +103,19 @@ public class MusicController implements Initializable {
 
     @FXML
     void nextButton(ActionEvent event) {
-        System.out.println("nextButton clicked");
+        if (currentMusic != null) {
+            System.out.println("Next: " + currentMusic.getFile_path());
+        } else {
+            System.out.println("No music selected");
+        }
     }
 
     @FXML
     void previousButton(ActionEvent event) {
-        System.out.println("previousButton clicked");
+        if (currentMusic != null) {
+            System.out.println("Prev: " + currentMusic.getFile_path());
+        } else {
+            System.out.println("No music selected");
+        }
     }
-
 }

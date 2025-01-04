@@ -13,6 +13,7 @@ module com.tubes.teluhear {
     requires java.sql;
     requires mysql.connector.j;
     requires java.desktop;
+    requires javafx.media;
 
     opens com.tubes.teluhear to javafx.fxml;
     exports com.tubes.teluhear;
