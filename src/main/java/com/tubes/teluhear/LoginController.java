@@ -1,6 +1,7 @@
 package com.tubes.teluhear;
 
 import com.tubes.teluhear.database.UserDAO;
+import com.tubes.teluhear.database.SubsDAO;
 import com.tubes.teluhear.database.dbConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,9 +25,11 @@ public class LoginController {
     private Label alertLabel;
 
     private UserDAO UserDAO;
+    private SubsDAO SubsDAO;
 
     public LoginController() {
         this.UserDAO = new UserDAO(dbConnection.getConnection());
+        this.SubsDAO = new SubsDAO(dbConnection.getConnection());
     }
 
     @FXML
@@ -34,6 +37,7 @@ public class LoginController {
         String username = usernameF.getText();
         String password = passwordF.getText();
         int id;
+        boolean isPremium;
 
         if (username.isEmpty() || password.isEmpty()) {
             alertLabel.setText("Username atau Password tidak boleh kosong");
@@ -43,6 +47,15 @@ public class LoginController {
                 id = UserDAO.getUserId(username);
                 SessionManager.getInstance().setUsername(username);
                 SessionManager.getInstance().setId(id);
+
+                isPremium = SubsDAO.checkSubs(id);
+
+                if(isPremium){
+                    SessionManager.getInstance().setRole("premium");
+                } else {
+                    SessionManager.getInstance().setRole("free");
+                }
+
                 goToHome();
             } else {
                 alertLabel.setText("Username atau Password salah");

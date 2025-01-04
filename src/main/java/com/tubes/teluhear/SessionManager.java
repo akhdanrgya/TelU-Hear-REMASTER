@@ -3,6 +3,7 @@ package com.tubes.teluhear;
 public class SessionManager {
     private static SessionManager instance;
     private String username;
+    private String role;
     private int id;
 
     private SessionManager() {}
@@ -28,6 +29,14 @@ public class SessionManager {
 
     public int getId() {
         return id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void clearSession() {

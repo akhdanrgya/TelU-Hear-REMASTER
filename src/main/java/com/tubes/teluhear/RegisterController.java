@@ -62,7 +62,7 @@ public class RegisterController {
         } else if (!password.equals(confirmPassword)) {
             alertR.setText("Password dan Konfirmasi Password tidak cocok");
         } else {
-            UserModel user = new UserModel(username, password, 0);
+            UserModel user = new UserModel(username, password);
             boolean isRegisterSuccess = UserDAO.register(user);
 
             if (isRegisterSuccess) {

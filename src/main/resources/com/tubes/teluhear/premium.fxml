@@ -9,9 +9,9 @@
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
          <children>
-            <Label text="Anda bukan user premium" />
-            <Label text="Dapatkan premium sekarang" />
-            <Button mnemonicParsing="false" text="premium" />
+            <Label fx:id="premiumLabel1" text="Anda bukan user premium" />
+            <Label fx:id="premiumLabel2" text="Dapatkan premium sekarang" />
+            <Button fx:id="premiumButtonAction" mnemonicParsing="false" onAction="#premiumButton" text="premium" />
          </children>
       </VBox>
    </children>

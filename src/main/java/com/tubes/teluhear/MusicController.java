@@ -79,6 +79,7 @@ public class MusicController implements Initializable {
                 e.printStackTrace();
             }
         }
+
     }
 
     public void setCurrentMusic(MusicModel music) {
