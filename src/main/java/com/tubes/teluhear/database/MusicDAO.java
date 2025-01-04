@@ -18,14 +18,15 @@ public class MusicDAO {
         List<MusicModel> musicList = new ArrayList<>();
         String sql = "SELECT * FROM music";
 
-        try(PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 MusicModel music = new MusicModel(
                         rs.getInt("id"),
                         rs.getString("judul"),
                         rs.getString("artist"),
                         rs.getString("genre"),
-                        rs.getString("duration")
+                        rs.getString("duration"),
+                        rs.getString("file_path")
                 );
                 musicList.add(music);
             }
@@ -63,7 +64,8 @@ public class MusicDAO {
                         resultSet.getString("judul"),
                         resultSet.getString("artist"),
                         resultSet.getString("genre"),
-                        resultSet.getString("duration")
+                        resultSet.getString("duration"),
+                        resultSet.getString("file_path")
                 );
                 musicList.add(music);
             }
@@ -74,4 +76,25 @@ public class MusicDAO {
 
         return musicList;
     }
+
+    public String PlayMusic (String tittle) {
+        String filePath = null;
+        String sql = "SELECT file_path FROM music WHERE judul = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, tittle);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                filePath = rs.getString("file_path");
+            }
+
+            System.out.println(filePath);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return filePath;
+    }
+
 }

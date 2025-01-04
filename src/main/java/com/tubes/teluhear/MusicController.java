@@ -4,10 +4,12 @@ import com.tubes.teluhear.database.dbConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import com.tubes.teluhear.database.MusicModel;
 import com.tubes.teluhear.database.MusicDAO;
 import javafx.scene.layout.Pane;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +22,9 @@ public class MusicController implements Initializable {
     private GridPane musicGrid;
 
     private MusicDAO musicDAO;
+
+    @FXML
+    private Slider musicSlider;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,5 +60,19 @@ public class MusicController implements Initializable {
         }
     }
 
+    @FXML
+    void playButton(ActionEvent event) {
+        System.out.println("playButton clicked");
+    }
+
+    @FXML
+    void nextButton(ActionEvent event) {
+        System.out.println("nextButton clicked");
+    }
+
+    @FXML
+    void previousButton(ActionEvent event) {
+        System.out.println("previousButton clicked");
+    }
 
 }
