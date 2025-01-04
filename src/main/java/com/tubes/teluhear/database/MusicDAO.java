@@ -112,4 +112,22 @@ public class MusicDAO {
         }
     }
 
+    public int getMusicIdByJudul(String judul) {
+        String sql = "SELECT id FROM music WHERE judul = ?";
+        int musicId = -1; // default value jika tidak ditemukan
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, judul);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                musicId = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching music id: " + e.getMessage());
+        }
+
+        return musicId;
+    }
+
+
 }

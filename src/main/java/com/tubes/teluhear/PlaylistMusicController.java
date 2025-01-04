@@ -1,12 +1,15 @@
 package com.tubes.teluhear;
 
 import com.tubes.teluhear.database.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -86,5 +89,30 @@ public class PlaylistMusicController implements Initializable {
             }
         }
     }
+
+    @FXML
+    void addMusic(ActionEvent event) {
+        goToForm();
+    }
+
+    public void goToForm() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/addPlaylistMusicForm.fxml"));
+            Pane root = loader.load();
+
+            AddPlaylistMusicFormController controller = loader.getController();
+
+            controller.setPlaylistId(playlistId);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Add Playlist");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

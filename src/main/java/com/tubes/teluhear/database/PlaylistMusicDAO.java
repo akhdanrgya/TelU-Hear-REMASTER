@@ -39,11 +39,11 @@ public class PlaylistMusicDAO {
     }
 
 
-    public boolean addPlaylistMusic(PlaylistMusicModel playlistMusic) {
+    public boolean addPlaylistMusic(int idPlaylist, int idMusic) {
         String sql = "INSERT INTO playlist_music (id_playlist, id_music) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, playlistMusic.getIdPlaylist());
-            stmt.setInt(2, playlistMusic.getIdMusic());
+            stmt.setInt(1, idPlaylist);
+            stmt.setInt(2, idMusic);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error adding playlist music: " + e.getMessage());

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.AddPlaylistMusicFormController">
+   <children>
+      <ChoiceBox fx:id="musicList" layoutX="225.0" layoutY="175.0" prefWidth="150.0" />
+      <Button layoutX="281.0" layoutY="217.0" mnemonicParsing="false" onAction="#addButton" text="Add" />
+   </children>
+</AnchorPane>
