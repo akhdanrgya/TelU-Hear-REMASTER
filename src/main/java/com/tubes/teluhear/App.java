@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 955, 600);
             stage.setTitle("Login TeluHear!");
             stage.setScene(scene);

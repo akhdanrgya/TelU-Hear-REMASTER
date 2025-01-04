@@ -93,17 +93,17 @@ public class MusicController implements Initializable {
 
             File file = new File(currentMusic.getFile_path());
             if (file.exists()) {
-                System.out.println("Playing: " + currentMusic.getFile_path());
-                judulBawah.setText(currentMusic.getJudul());
                 Media media = new Media(file.toURI().toString());
                 mediaPlayer = new MediaPlayer(media);
             } else {
                 URL resource = getClass().getResource("/" + currentMusic.getFile_path());
                 if (resource != null) {
+                    System.out.println("Playing: " + currentMusic.getFile_path());
+                    judulBawah.setText(currentMusic.getJudul());
                     Media media = new Media(resource.toExternalForm());
                     mediaPlayer = new MediaPlayer(media);
                 } else {
-                    System.out.println("Resource not found: " + currentMusic.getFile_path());
+                    System.out.println("Resource tidak valid bos: " + currentMusic.getFile_path());
                 }
             }
 
@@ -114,7 +114,7 @@ public class MusicController implements Initializable {
             }
 
         } else {
-            System.out.println("No music selected");
+            judulBawah.setText("No music selected");
         }
     }
 
