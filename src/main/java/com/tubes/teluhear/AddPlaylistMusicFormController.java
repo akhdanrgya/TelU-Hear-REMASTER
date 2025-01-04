@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class AddPlaylistMusicFormController {
@@ -31,7 +30,6 @@ public class AddPlaylistMusicFormController {
     }
 
     public void initialize() {
-
         loadMusicList();
     }
 
@@ -47,7 +45,7 @@ public class AddPlaylistMusicFormController {
     }
 
     public void setPlaylistId(int playlistId) {
-        this.playlistId = playlistId; // Simpan playlistId yang dikirim
+        this.playlistId = playlistId;
         System.out.println("Playlist ID set in AddPlaylistMusicFormController: " + playlistId);
     }
 
