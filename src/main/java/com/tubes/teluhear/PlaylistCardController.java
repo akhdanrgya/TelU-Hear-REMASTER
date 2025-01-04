@@ -23,7 +23,7 @@ public class PlaylistCardController {
 
 
     public void setPlaylistData(PlaylistModel playlist) {
-        this.playlistData = playlist; // Set data
+        this.playlistData = playlist;
         judulPlaylist.setText(playlist.getPlaylist_name());
 
         String imagePath = playlist.getImage();
@@ -35,15 +35,12 @@ public class PlaylistCardController {
     @FXML
     private void handleCardClick() {
         try {
-            // Load FXML untuk window baru
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlaylistMusic.fxml"));
             Scene scene = new Scene(loader.load());
 
-            // Ambil controller window baru
             PlaylistMusicController controller = loader.getController();
             controller.setPlaylistId(playlistData.getId());
 
-            // Tampilkan window baru
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Playlist Music");

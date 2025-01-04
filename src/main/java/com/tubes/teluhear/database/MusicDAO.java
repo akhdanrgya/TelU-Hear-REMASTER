@@ -77,7 +77,7 @@ public class MusicDAO {
         return musicList;
     }
 
-    public String PlayMusic (String tittle) {
+    public String PlayMusic(String tittle) {
         String filePath = null;
         String sql = "SELECT file_path FROM music WHERE judul = ?";
 
@@ -95,6 +95,21 @@ public class MusicDAO {
         }
 
         return filePath;
+    }
+
+    public boolean addMusic(MusicModel music) {
+        String sql = "INSERT INTO music (judul, artist, genre, duration, file_path) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, music.getJudul());
+            stmt.setString(2, music.getArtist());
+            stmt.setString(3, music.getGenre());
+            stmt.setString(4, music.getDuration());
+            stmt.setString(5, music.getFile_path());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error adding music: " + e.getMessage());
+            return false;
+        }
     }
 
 }

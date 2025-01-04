@@ -22,10 +22,14 @@ public class PlaylistController implements Initializable {
 
     private PlaylistDAO playlistDAO;
 
+    private int userId;
+
     public void initialize(URL url, ResourceBundle rb) {
         playlistDAO = new PlaylistDAO(dbConnection.getConnection());
+        userId = SessionManager.getInstance().getId();
 
-        List<PlaylistModel> playlistDataList = playlistDAO.getPlaylist();
+
+        List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
 
         populatePlaylistGrid(playlistDataList);
     }

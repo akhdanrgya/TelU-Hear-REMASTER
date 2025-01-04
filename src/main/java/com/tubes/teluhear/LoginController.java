@@ -33,17 +33,23 @@ public class LoginController {
     void Login(ActionEvent event) {
         String username = usernameF.getText();
         String password = passwordF.getText();
+        int id;
 
         if (username.isEmpty() || password.isEmpty()) {
             alertLabel.setText("Username atau Password tidak boleh kosong");
         } else {
             boolean isLogin = UserDAO.login(username, password);
-            goToHome();
-            if (!isLogin) {
+            if (isLogin) {
+                id = UserDAO.getUserId(username);
+                SessionManager.getInstance().setUsername(username);
+                SessionManager.getInstance().setId(id);
+                goToHome();
+            } else {
                 alertLabel.setText("Username atau Password salah");
             }
         }
     }
+
 
     @FXML
     void Register(ActionEvent event) {
