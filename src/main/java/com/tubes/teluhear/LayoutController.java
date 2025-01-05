@@ -67,21 +67,5 @@ public class LayoutController implements Initializable {
         contentArea.getChildren().setAll(fxml);
     }
 
-    public void setPlayedMusic(MusicModel played) {
-
-        Platform.runLater(() -> {
-            System.out.println("Setting music: " + played.getJudul() + " by " + played.getArtist());
-            System.out.println("Before setting text: " + playedJudul.getText() + " / " + playedArtist.getText());
-            playedJudul.setText(played.getJudul());
-            playedArtist.setText(played.getArtist());
-            System.out.println("After setting text: " + playedJudul.getText() + " / " + playedArtist.getText());
-            homeButton.setVisible(true);
-        });
-
-
-    }
-
-
-
 
 }
