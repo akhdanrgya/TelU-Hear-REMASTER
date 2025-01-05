@@ -33,7 +33,7 @@ public class HomeController implements Initializable {
     private PlaylistDAO playlistDAO;
     private MusicDAO musicDAO;
 
-    private int userId;
+    private int userId = SessionManager.getInstance().getId();
 
 
     public void initialize(URL url, ResourceBundle rb) {
