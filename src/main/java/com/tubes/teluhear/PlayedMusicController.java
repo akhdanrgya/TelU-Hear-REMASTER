@@ -32,8 +32,8 @@ public class PlayedMusicController implements Initializable {
     private Button pauseText;
 
     private MediaPlayer mediaPlayer;
-    private List<MusicModel> musicList; // List untuk menyimpan semua musik dari database
-    private int currentIndex = 0; // Index musik yang sedang dimainkan
+    private List<MusicModel> musicList;
+    private int currentIndex = 0;
     private MusicDAO musicDAO;
     private MusicModel currentMusic;
 
@@ -48,6 +48,13 @@ public class PlayedMusicController implements Initializable {
         if (!musicList.isEmpty()) {
             setMusicData(musicList.get(currentIndex));
         }
+
+        // Tambahkan listener ke slider untuk kontrol musik
+        SliderMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (SliderMusic.isValueChanging() && mediaPlayer != null) {
+                mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(newValue.doubleValue() / 100));
+            }
+        });
     }
 
     public void setMusicData(MusicModel musicData) {
@@ -68,7 +75,18 @@ public class PlayedMusicController implements Initializable {
                 : new Media(getClass().getResource("/" + music.getFile_path()).toExternalForm());
         mediaPlayer = new MediaPlayer(media);
 
-        mediaPlayer.setOnEndOfMedia(() -> Next(null)); // Panggil Next otomatis setelah selesai
+        mediaPlayer.setOnReady(() -> {
+            SliderMusic.setMax(100); // Slider max selalu 100
+        });
+
+        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+            if (!SliderMusic.isValueChanging()) {
+                double progress = newValue.toSeconds() / mediaPlayer.getMedia().getDuration().toSeconds() * 100;
+                SliderMusic.setValue(progress);
+            }
+        });
+
+        mediaPlayer.setOnEndOfMedia(() -> Next(null));
     }
 
     @FXML
