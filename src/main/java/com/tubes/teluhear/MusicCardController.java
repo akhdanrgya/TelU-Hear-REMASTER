@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MusicCardController implements Initializable {
@@ -32,6 +33,8 @@ public class MusicCardController implements Initializable {
 
     private MusicCardClickListener clickListener;
 
+    private List<MusicModel> musicList;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         musicDAO = new MusicDAO(dbConnection.getConnection());
@@ -44,6 +47,10 @@ public class MusicCardController implements Initializable {
         musicArtist.setText(music.getArtist());
     }
 
+    public void setMusicList(List<MusicModel> musicList) {
+        this.musicList = musicList;
+    }
+
 
     public void setClickListener(MusicCardClickListener clickListener) {
         this.clickListener = clickListener;
@@ -53,7 +60,7 @@ public class MusicCardController implements Initializable {
     private void onCardClicked(MouseEvent event) {
 
         if (clickListener != null) {
-            clickListener.onMusicCardClicked(musicData);
+            clickListener.onMusicCardClicked(musicData,musicList);
         }
 
     }

@@ -49,7 +49,6 @@ public class PlayedMusicController implements Initializable {
             setMusicData(musicList.get(currentIndex));
         }
 
-        // Tambahkan listener ke slider untuk kontrol musik
         SliderMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (SliderMusic.isValueChanging() && mediaPlayer != null) {
                 mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(newValue.doubleValue() / 100));
@@ -76,7 +75,7 @@ public class PlayedMusicController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
 
         mediaPlayer.setOnReady(() -> {
-            SliderMusic.setMax(100); // Slider max selalu 100
+            SliderMusic.setMax(100);
         });
 
         mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {

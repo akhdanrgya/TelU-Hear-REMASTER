@@ -36,17 +36,22 @@ public class MusicController implements Initializable {
     private MusicModel currentMusic;
     private MediaPlayer mediaPlayer;
 
+    private List<MusicModel> musicList;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         musicDAO = new MusicDAO(dbConnection.getConnection());
 
-        List<MusicModel> musicDataList = musicDAO.getAllMusic();
+        musicList = musicDAO.getAllMusic();
 
-        populateMusicGrid(musicDataList);
 
+        populateMusicGrid(musicList);
         System.out.println("MusicController initialized.");
+        System.out.println(musicList.size());
     }
 
+    @FXML
     private void populateMusicGrid(List<MusicModel> musicDataList) {
         if (musicDataList == null || musicDataList.isEmpty()) {
             System.out.println("No music data found.");
@@ -65,9 +70,23 @@ public class MusicController implements Initializable {
 
                 controller.setClickListener(new MusicCardClickListener() {
                     @Override
-                    public void onMusicCardClicked(MusicModel music) {
-                        setCurrentMusic(music);
-                        showPlayedMusic(music);
+                    public void onMusicCardClicked(MusicModel clickedMusic, List<MusicModel> musicList) {
+                        if (musicList == null || musicList.isEmpty()) {
+                            System.out.println("Music list is empty or null.");
+                            return;
+                        }
+
+                        MusicModel selectedMusic = musicList.stream()
+                                .filter(m -> m.getId() == clickedMusic.getId())
+                                .findFirst()
+                                .orElse(null);
+
+                        if (selectedMusic != null) {
+                            setCurrentMusic(selectedMusic);
+                            showPlayedMusic(selectedMusic);
+                        } else {
+                            System.out.println("Music not found in musicList.");
+                        }
                     }
                 });
 
