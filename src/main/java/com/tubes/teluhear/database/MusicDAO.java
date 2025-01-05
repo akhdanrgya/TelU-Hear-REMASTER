@@ -24,8 +24,6 @@ public class MusicDAO {
                         rs.getInt("id"),
                         rs.getString("judul"),
                         rs.getString("artist"),
-                        rs.getString("genre"),
-                        rs.getString("duration"),
                         rs.getString("file_path")
                 );
                 musicList.add(music);
@@ -63,8 +61,6 @@ public class MusicDAO {
                         resultSet.getInt("id"),
                         resultSet.getString("judul"),
                         resultSet.getString("artist"),
-                        resultSet.getString("genre"),
-                        resultSet.getString("duration"),
                         resultSet.getString("file_path")
                 );
                 musicList.add(music);
@@ -98,13 +94,11 @@ public class MusicDAO {
     }
 
     public boolean addMusic(MusicModel music) {
-        String sql = "INSERT INTO music (judul, artist, genre, duration, file_path) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO music (judul, artist, file_path) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, music.getJudul());
             stmt.setString(2, music.getArtist());
-            stmt.setString(3, music.getGenre());
-            stmt.setString(4, music.getDuration());
-            stmt.setString(5, music.getFile_path());
+            stmt.setString(3, music.getFile_path());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error adding music: " + e.getMessage());
