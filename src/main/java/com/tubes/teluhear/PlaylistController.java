@@ -42,7 +42,7 @@ public class PlaylistController implements Initializable {
     }
 
     // Method untuk reload playlist dari database
-    private void reloadPlaylist() {
+    public void reloadPlaylist() {
         // Ambil data playlist dari database
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
         System.out.println("Reloading playlist data: " + playlistDataList);
@@ -112,10 +112,9 @@ public class PlaylistController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Add Playlist");
 
+            stage.show();
             // Tambahkan event handler setelah form ditutup
             stage.setOnCloseRequest(event -> reloadPlaylist()); // Reload playlist setelah form ditutup
-
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

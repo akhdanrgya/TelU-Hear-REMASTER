@@ -5,10 +5,13 @@ import com.tubes.teluhear.database.PlaylistDAO;
 import com.tubes.teluhear.database.PlaylistModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -30,12 +33,14 @@ public class PlaylistFormController {
 
     private PlaylistDAO playlistDAO;
 
+    private PlaylistController playlistController;
+
     public PlaylistFormController() {
         this.playlistDAO = new PlaylistDAO(dbConnection.getConnection());
     }
 
     @FXML
-    void submit(ActionEvent event) {
+    void submit(ActionEvent event) throws IOException {
         judul = inputJudul.getText();
         userId = SessionManager.getInstance().getId();
 
@@ -51,6 +56,12 @@ public class PlaylistFormController {
         } else {
             System.out.println("Gagal menambahkan playlist");
         }
+
+//        tutup halaman form disini ...
+        // Menutup halaman (stage)
+        Stage stage = (Stage) inputJudul.getScene().getWindow();
+        stage.close(); // Menutup jendela setelah submit
+        playlistController.reloadPlaylist();
     }
 
     @FXML
