@@ -33,7 +33,7 @@ public class PlayedMusicController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Play(null);
+        
     }
 
     public void setMusicData(MusicModel musicData) {
