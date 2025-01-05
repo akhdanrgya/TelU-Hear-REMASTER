@@ -37,8 +37,6 @@ public class PlaylistFormController {
 
         playlistDAO.addPlaylist(playlist);
 
-
-
     }
 
     @FXML

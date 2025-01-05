@@ -1,11 +1,9 @@
 package com.tubes.teluhear;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
@@ -15,8 +13,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.tubes.teluhear.database.MusicModel;
-
 public class LayoutController implements Initializable {
     @FXML
     private Label welcomeText;
@@ -24,11 +20,6 @@ public class LayoutController implements Initializable {
     @FXML
     private StackPane contentArea;
 
-    @FXML
-    private Button homeButton, musicButton, playlistButton, premiumButton;
-
-    @FXML
-    private Label playedJudul, playedArtist;
 
     public void initialize (URL location, ResourceBundle resources){
 

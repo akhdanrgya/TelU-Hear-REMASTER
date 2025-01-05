@@ -44,7 +44,6 @@ public class MusicCardController implements Initializable {
         musicArtist.setText(music.getArtist());
     }
 
-    // Set listener untuk mendengarkan klik
     public void setClickListener(MusicCardClickListener clickListener) {
         this.clickListener = clickListener;
     }
