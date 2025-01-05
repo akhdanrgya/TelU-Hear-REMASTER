@@ -4,6 +4,7 @@ import com.tubes.teluhear.database.MusicModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
@@ -22,6 +23,9 @@ public class PlayedMusicController implements Initializable {
     @FXML
     private Slider SliderMusic;
 
+    @FXML
+    private Button pauseText;
+
     private MediaPlayer mediaPlayer;
     private MusicCardClickListener clickListener;
 
@@ -29,7 +33,7 @@ public class PlayedMusicController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Optional: Initialize media player or UI components
+        playMusic();
     }
 
     public void setMusicData(MusicModel musicData) {
@@ -48,36 +52,43 @@ public class PlayedMusicController implements Initializable {
 
     @FXML
     void Play(ActionEvent event) {
-        if (currentMusic != null) {
-
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                mediaPlayer.dispose();
+        if (mediaPlayer != null) {
+            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+                mediaPlayer.pause();
+                pauseText.setText("Play");
+            } else if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
+                mediaPlayer.play();
+                pauseText.setText("Pause");
             }
+        }
+    }
 
-            File file = new File(currentMusic.getFile_path());
-            if (file.exists()) {
-                Media media = new Media(file.toURI().toString());
+    void playMusic() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+        }
+
+        File file = new File(currentMusic.getFile_path());
+        if (file.exists()) {
+            Media media = new Media(file.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+        } else {
+            URL resource = getClass().getResource("/" + currentMusic.getFile_path());
+            if (resource != null) {
+                System.out.println("Playing: " + currentMusic.getFile_path());
+                pauseText.setText("Pause");
+                Media media = new Media(resource.toExternalForm());
                 mediaPlayer = new MediaPlayer(media);
             } else {
-                URL resource = getClass().getResource("/" + currentMusic.getFile_path());
-                if (resource != null) {
-                    System.out.println("Playing: " + currentMusic.getFile_path());
-                    Media media = new Media(resource.toExternalForm());
-                    mediaPlayer = new MediaPlayer(media);
-                } else {
-                    System.out.println("Resource tidak valid bos: " + currentMusic.getFile_path());
-                }
+                System.out.println("Resource tidak valid bos: " + currentMusic.getFile_path());
             }
+        }
 
-            if (mediaPlayer != null) {
-                mediaPlayer.play();
-            } else {
-                System.out.println("Failed to initialize mediaPlayer.");
-            }
-
+        if (mediaPlayer != null) {
+            mediaPlayer.play();
         } else {
-            System.out.println("Current Music is null!");
+            System.out.println("Failed to initialize mediaPlayer.");
         }
     }
 

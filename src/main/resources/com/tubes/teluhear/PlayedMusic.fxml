@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlayedMusicController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
@@ -19,7 +18,7 @@
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#Prev" text="Previous" />
-                        <Button mnemonicParsing="false" onAction="#Play" text="Play" />
+                        <Button fx:id="pauseText" mnemonicParsing="false" onAction="#Play" text="Pause" />
                         <Button mnemonicParsing="false" onAction="#Next" text="Next" />
                      </children>
                   </HBox>
