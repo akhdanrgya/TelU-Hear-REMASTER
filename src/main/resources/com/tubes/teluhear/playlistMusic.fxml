@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistMusicController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: fbffd8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistMusicController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
+      <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: fbffd8;">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #dce6f5;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#addMusic" text="Add Music" />
+                  <Button mnemonicParsing="false" onAction="#addMusic" style="-fx-background-color: fbffd8;" text="Add Music" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <ScrollPane prefHeight="429.0" prefWidth="600.0">
+            <ScrollPane prefHeight="429.0" prefWidth="600.0" style="-fx-background-color: fbffd8;">
                <content>
                   <GridPane fx:id="playlistMusicGrid">
                     <columnConstraints>

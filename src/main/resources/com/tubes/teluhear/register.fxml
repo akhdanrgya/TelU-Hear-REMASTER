@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.RegisterController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: a3b9d9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.RegisterController">
    <children>
-      <TextField fx:id="usernamefr" layoutX="226.0" layoutY="86.0" promptText="Username" />
-      <PasswordField fx:id="passwordfr" layoutX="226.0" layoutY="141.0" promptText="Password" />
-      <PasswordField fx:id="cpasswordfr" layoutX="226.0" layoutY="196.0" promptText="Confirm Password" />
-      <Button layoutX="226.0" layoutY="276.0" mnemonicParsing="false" onAction="#Register" text="Register" />
-      <Button layoutX="329.0" layoutY="276.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+      <TextField fx:id="usernamefr" layoutX="226.0" layoutY="86.0" promptText="Username" style="-fx-background-radius: 10;" />
+      <PasswordField fx:id="passwordfr" layoutX="226.0" layoutY="141.0" promptText="Password" style="-fx-background-radius: 10;" />
+      <PasswordField fx:id="cpasswordfr" layoutX="226.0" layoutY="196.0" promptText="Confirm Password" style="-fx-background-radius: 10;" />
+      <Button layoutX="226.0" layoutY="248.0" mnemonicParsing="false" onAction="#Register" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Register" />
+      <Button layoutX="329.0" layoutY="248.0" mnemonicParsing="false" onAction="#Login" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Login" />
       <Label fx:id="alertR" layoutX="226.0" layoutY="231.0" />
    </children>
 </AnchorPane>

@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane prefHeight="441.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.MusicController">
+<StackPane prefHeight="441.0" prefWidth="600.0" style="-fx-background-color: bdeaf2;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.MusicController">
    <children>
-      <VBox prefHeight="441.0" prefWidth="600.0">
+      <VBox prefHeight="441.0" prefWidth="600.0" style="-fx-background-color: bdeaf2;">
          <children>
-            <ScrollPane prefHeight="400.0" prefWidth="600.0">
+            <ScrollPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: bdeaf2;">
                <content>
                   <GridPane fx:id="musicGrid" hgap="10.0" prefHeight="0.0" prefWidth="0.0" vgap="10.0">
                     <rowConstraints>
@@ -40,9 +40,9 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="43.0" prefWidth="600.0" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#previousButton" text="Previous" />
-                        <Button fx:id="pauseText" mnemonicParsing="false" onAction="#pauseButton" text="Play" />
-                        <Button mnemonicParsing="false" onAction="#nextButton" text="Next" />
+                        <Button mnemonicParsing="false" onAction="#previousButton" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Previous" />
+                        <Button fx:id="pauseText" mnemonicParsing="false" onAction="#pauseButton" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Play" />
+                        <Button mnemonicParsing="false" onAction="#nextButton" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Next" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">

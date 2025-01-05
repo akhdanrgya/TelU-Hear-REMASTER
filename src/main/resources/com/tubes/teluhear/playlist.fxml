@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistController">
+<StackPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dce6f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #dce6f5;">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="600.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="600.0" style="-fx-background-color: fbffd8;">
                <children>
-                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addPlaylist" text="Add Playlist" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addPlaylist" style="-fx-background-radius: 20; -fx-background-color: #dce6f5;" text="Add Playlist" />
                </children>
                <padding>
-                  <Insets left="10.0" right="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <ScrollPane prefHeight="369.0" prefWidth="600.0">
+            <ScrollPane prefHeight="369.0" prefWidth="600.0" style="-fx-background-image: #dce6f5;">
                <content>
                   <GridPane fx:id="playlistGrid">
                     <columnConstraints>
