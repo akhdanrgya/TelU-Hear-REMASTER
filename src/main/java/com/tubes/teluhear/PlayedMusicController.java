@@ -33,7 +33,7 @@ public class PlayedMusicController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Optional: Initialize media player or UI components
+        Play(null);
     }
 
     public void setMusicData(MusicModel musicData) {
@@ -53,7 +53,6 @@ public class PlayedMusicController implements Initializable {
     @FXML
     void Play(ActionEvent event) {
         if (currentMusic != null) {
-            // Stop previous player if exists
             if (mediaPlayer != null) {
                 if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
                     mediaPlayer.pause();
@@ -63,7 +62,6 @@ public class PlayedMusicController implements Initializable {
                     pauseText.setText("Pause");
                 }
             } else {
-                // Initialize and play the music
                 File file = new File(currentMusic.getFile_path());
                 if (file.exists()) {
                     Media media = new Media(file.toURI().toString());
@@ -80,7 +78,6 @@ public class PlayedMusicController implements Initializable {
                     }
                 }
 
-                // Play the music
                 if (mediaPlayer != null) {
                     mediaPlayer.play();
                     pauseText.setText("Pause");
@@ -95,7 +92,7 @@ public class PlayedMusicController implements Initializable {
 
     @FXML
     void Prev(ActionEvent event) {
-        // Logic untuk prev
+
     }
 
     public void stopMusicOnClose(Stage stage) {
@@ -106,4 +103,5 @@ public class PlayedMusicController implements Initializable {
             }
         });
     }
+
 }
