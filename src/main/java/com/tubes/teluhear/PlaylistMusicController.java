@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
@@ -30,6 +31,9 @@ public class PlaylistMusicController implements Initializable {
     private PlaylistMusicDAO playlistMusicDAO;
 
     private MusicDAO musicDAO;
+
+    private MusicModel currentMusic;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,10 +73,6 @@ public class PlaylistMusicController implements Initializable {
             return;
         }
 
-        for (MusicModel music : musicList) {
-            System.out.println("Music ID: " + music.getJudul());
-        }
-
         for (int i = 0; i < musicList.size(); i++) {
             MusicModel music = musicList.get(i);
 
@@ -82,6 +82,24 @@ public class PlaylistMusicController implements Initializable {
 
                 MusicCardController controller = loader.getController();
                 controller.setMusicData(music, i + 1);
+                controller.setMusicList(musicList);
+
+                controller.setClickListener(new MusicCardClickListener() {
+                    @Override
+                    public void onMusicCardClicked(MusicModel clickedMusic, List<MusicModel> musicList) {
+                        MusicModel selectedMusic = musicList.stream()
+                                .filter(m -> m.getId() == clickedMusic.getId())
+                                .findFirst()
+                                .orElse(null);
+
+                        if (selectedMusic != null) {
+                            setCurrentMusic(selectedMusic);
+                            showPlayedMusic(selectedMusic);
+                        } else {
+                            System.out.println("Music not found in the playlist.");
+                        }
+                    }
+                });
 
                 playlistMusicGrid.add(musicCardView, 0, i);
             } catch (IOException e) {
@@ -89,6 +107,9 @@ public class PlaylistMusicController implements Initializable {
             }
         }
     }
+
+
+
 
     @FXML
     void addMusic(ActionEvent event) {
@@ -109,6 +130,36 @@ public class PlaylistMusicController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Add Playlist");
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setCurrentMusic(MusicModel music) {
+        this.currentMusic = music;
+    }
+
+    public void showPlayedMusic(MusicModel musicModel) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlayedMusic.fxml"));
+
+            Parent root = loader.load();
+
+            PlayedMusicController controller = loader.getController();
+
+            if (controller != null) {
+                controller.setMusicData(musicModel);
+            } else {
+                System.out.println("Controller is null");
+            }
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            controller.stopMusicOnClose(stage);
+            stage.setScene(scene);
+            stage.setTitle("Played Music");
+            stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
