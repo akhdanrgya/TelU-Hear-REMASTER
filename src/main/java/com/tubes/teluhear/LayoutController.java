@@ -29,6 +29,7 @@ public class LayoutController implements Initializable {
     private MusicDAO musicDAO;
 
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("playedMusicArea: " + playedMusicArea);  // Debugging
         try {
             Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/home.fxml"));
             contentArea.getChildren().removeAll();

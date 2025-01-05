@@ -30,23 +30,33 @@ public class PlaylistController implements Initializable {
     private Button addButton;
 
     private PlaylistDAO playlistDAO;
-
     private int userId;
 
     public void initialize(URL url, ResourceBundle rb) {
         playlistDAO = new PlaylistDAO(dbConnection.getConnection());
         userId = SessionManager.getInstance().getId();
 
-        List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
+        reloadPlaylist();
+    }
 
+    // Method untuk reload playlist dari database
+    private void reloadPlaylist() {
+        // Ambil data playlist dari database
+        List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
+        System.out.println("Reloading playlist data: " + playlistDataList);
+
+        // Bersihkan grid sebelumnya
+        playlistGrid.getChildren().clear();
+
+        // Populate grid dengan playlist terbaru
         populatePlaylistGrid(playlistDataList);
 
+        // Mengatur button add berdasarkan jumlah playlist jika role "free"
         if (SessionManager.getInstance().getRole().equals("free")) {
             if (playlistDataList.size() > 1) {
                 addButton.setDisable(true);
             }
         }
-
     }
 
     private void populatePlaylistGrid(List<PlaylistModel> playlistModelList) {
@@ -55,13 +65,14 @@ public class PlaylistController implements Initializable {
             return;
         }
 
+        System.out.println(playlistModelList);
+
         int column = 0;
         int row = 0;
 
-        for (int i = 0; i < playlistModelList.size(); i++) {
-            PlaylistModel playlist = playlistModelList.get(i);
-
+        for (PlaylistModel playlist : playlistModelList) {
             try {
+                System.out.println(playlist);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlaylistCard.fxml"));
                 Pane playlistCardView = loader.load();
 
@@ -83,11 +94,9 @@ public class PlaylistController implements Initializable {
         }
     }
 
-
     public void addPlaylist(ActionEvent actionEvent) {
         System.out.println("Add Playlist");
         goToForm();
-
     }
 
     private void goToForm() {
@@ -98,6 +107,10 @@ public class PlaylistController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Add Playlist");
+
+            // Tambahkan event handler setelah form ditutup
+            stage.setOnHiding(event -> reloadPlaylist()); // Reload playlist setelah form ditutup
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
