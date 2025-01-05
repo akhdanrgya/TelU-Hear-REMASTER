@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 
@@ -23,6 +25,9 @@ public class PlaylistController implements Initializable {
 
     @FXML
     private GridPane playlistGrid;
+
+    @FXML
+    private Button addButton;
 
     private PlaylistDAO playlistDAO;
 
@@ -36,6 +41,13 @@ public class PlaylistController implements Initializable {
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
 
         populatePlaylistGrid(playlistDataList);
+
+        if (SessionManager.getInstance().getRole().equals("free")) {
+            if (playlistDataList.size() > 1) {
+                addButton.setDisable(true);
+            }
+        }
+
     }
 
     private void populatePlaylistGrid(List<PlaylistModel> playlistModelList) {
@@ -79,7 +91,7 @@ public class PlaylistController implements Initializable {
 
     }
 
-    private void goToForm(){
+    private void goToForm() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/addPlaylistForm.fxml"));
             Scene scene = new Scene(loader.load());
