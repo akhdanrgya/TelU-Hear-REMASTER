@@ -64,25 +64,4 @@ public class LayoutController implements Initializable {
         contentArea.getChildren().setAll(fxml);
     }
 
-    public void showPlayedMusic(MusicModel musicModel) {
-        if (playedMusicArea != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlayedMusic.fxml"));
-                Pane playedMusicPane = loader.load();
-
-                PlayedMusicController controller = loader.getController();
-                controller.setMusicData(musicModel);
-
-                playedMusicArea.getChildren().add(playedMusicPane);
-
-                System.out.println("anjay bisaaa");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("playedMusicArea is null");
-        }
-    }
-
 }

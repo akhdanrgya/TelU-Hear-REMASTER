@@ -4,6 +4,8 @@ import com.tubes.teluhear.database.dbConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -14,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,10 +60,6 @@ public class MusicController implements Initializable {
         }
 
         try {
-            FXMLLoader layoutLoader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/layout.fxml"));
-            Pane layoutView = layoutLoader.load();
-            LayoutController layoutController = layoutLoader.getController();
-
             for (int i = 0; i < musicDataList.size(); i++) {
                 MusicModel music = musicDataList.get(i);
 
@@ -68,14 +67,14 @@ public class MusicController implements Initializable {
                 Pane musicCardView = loader.load();
 
                 MusicCardController controller = loader.getController();
-                controller.setLayoutController(layoutController);
                 controller.setMusicData(music, i + 1);
 
                 controller.setClickListener(new MusicCardClickListener() {
                     @Override
                     public void onMusicCardClicked(MusicModel music) {
                         setCurrentMusic(music);
-                        playButton();
+                        showPlayedMusic(music);
+//                        playButton();
                     }
                 });
 
@@ -160,4 +159,32 @@ public class MusicController implements Initializable {
         }
     }
 
+    public void showPlayedMusic(MusicModel musicModel) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlayedMusic.fxml"));
+
+            Parent root = loader.load();
+
+            PlayedMusicController controller = loader.getController();
+
+            if (controller != null) {
+                controller.setMusicData(musicModel);
+            } else {
+                System.out.println("Controller is null");
+            }
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            controller.stopMusicOnClose(stage);
+            stage.setScene(scene);
+            stage.setTitle("Played Music");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
+

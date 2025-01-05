@@ -28,8 +28,6 @@ public class MusicCardController implements Initializable {
 
     private MusicModel musicData;
 
-    private LayoutController layoutController;
-
     private MusicDAO musicDAO;
 
     private MusicCardClickListener clickListener;
@@ -46,9 +44,6 @@ public class MusicCardController implements Initializable {
         musicArtist.setText(music.getArtist());
     }
 
-    public void setLayoutController(LayoutController layoutController) {
-        this.layoutController = layoutController;
-    }
 
     public void setClickListener(MusicCardClickListener clickListener) {
         this.clickListener = clickListener;
@@ -56,12 +51,6 @@ public class MusicCardController implements Initializable {
 
     @FXML
     private void onCardClicked(MouseEvent event) {
-
-        System.out.println(layoutController);
-
-        if (layoutController != null) {
-            layoutController.showPlayedMusic(musicData);
-        }
 
         if (clickListener != null) {
             clickListener.onMusicCardClicked(musicData);
