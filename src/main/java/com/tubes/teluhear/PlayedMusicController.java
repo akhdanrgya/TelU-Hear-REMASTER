@@ -33,7 +33,7 @@ public class PlayedMusicController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        playMusic();
+        // Optional: Initialize media player or UI components
     }
 
     public void setMusicData(MusicModel musicData) {
@@ -52,43 +52,44 @@ public class PlayedMusicController implements Initializable {
 
     @FXML
     void Play(ActionEvent event) {
-        if (mediaPlayer != null) {
-            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-                mediaPlayer.pause();
-                pauseText.setText("Play");
-            } else if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
-                mediaPlayer.play();
-                pauseText.setText("Pause");
-            }
-        }
-    }
-
-    void playMusic() {
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.dispose();
-        }
-
-        File file = new File(currentMusic.getFile_path());
-        if (file.exists()) {
-            Media media = new Media(file.toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-        } else {
-            URL resource = getClass().getResource("/" + currentMusic.getFile_path());
-            if (resource != null) {
-                System.out.println("Playing: " + currentMusic.getFile_path());
-                pauseText.setText("Pause");
-                Media media = new Media(resource.toExternalForm());
-                mediaPlayer = new MediaPlayer(media);
+        if (currentMusic != null) {
+            // Stop previous player if exists
+            if (mediaPlayer != null) {
+                if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+                    mediaPlayer.pause();
+                    pauseText.setText("Play");
+                } else {
+                    mediaPlayer.play();
+                    pauseText.setText("Pause");
+                }
             } else {
-                System.out.println("Resource tidak valid bos: " + currentMusic.getFile_path());
-            }
-        }
+                // Initialize and play the music
+                File file = new File(currentMusic.getFile_path());
+                if (file.exists()) {
+                    Media media = new Media(file.toURI().toString());
+                    mediaPlayer = new MediaPlayer(media);
+                } else {
+                    URL resource = getClass().getResource("/" + currentMusic.getFile_path());
+                    if (resource != null) {
+                        System.out.println("Playing: " + currentMusic.getFile_path());
+                        Media media = new Media(resource.toExternalForm());
+                        mediaPlayer = new MediaPlayer(media);
+                    } else {
+                        System.out.println("Resource tidak valid bos: " + currentMusic.getFile_path());
+                        return;
+                    }
+                }
 
-        if (mediaPlayer != null) {
-            mediaPlayer.play();
+                // Play the music
+                if (mediaPlayer != null) {
+                    mediaPlayer.play();
+                    pauseText.setText("Pause");
+                } else {
+                    System.out.println("Failed to initialize mediaPlayer.");
+                }
+            }
         } else {
-            System.out.println("Failed to initialize mediaPlayer.");
+            System.out.println("Current Music is null!");
         }
     }
 
