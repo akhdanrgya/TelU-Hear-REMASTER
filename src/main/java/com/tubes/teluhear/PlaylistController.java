@@ -13,8 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,7 +46,9 @@ public class PlaylistController implements Initializable {
         // Ambil data playlist dari database
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
         System.out.println("Reloading playlist data: " + playlistDataList);
-
+        File dir = new File("src/main/resources/image");
+        File[] files = dir.listFiles();
+        System.out.println(Arrays.toString(files));
         // Bersihkan grid sebelumnya
         playlistGrid.getChildren().clear();
 
@@ -109,7 +113,7 @@ public class PlaylistController implements Initializable {
             stage.setTitle("Add Playlist");
 
             // Tambahkan event handler setelah form ditutup
-            stage.setOnHiding(event -> reloadPlaylist()); // Reload playlist setelah form ditutup
+            stage.setOnCloseRequest(event -> reloadPlaylist()); // Reload playlist setelah form ditutup
 
             stage.show();
         } catch (IOException e) {

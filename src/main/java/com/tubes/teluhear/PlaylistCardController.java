@@ -28,9 +28,22 @@ public class PlaylistCardController {
 
         String imagePath = playlist.getImage();
 
-        Image image = new Image(getClass().getResourceAsStream(imagePath));
-        imagePlaylist.setImage(image);
+        // Log untuk mengecek nilai imagePath
+        System.out.println("Image Path: " + imagePath);
+
+        try {
+            // Memastikan input stream tidak null
+            if (getClass().getResourceAsStream(imagePath) == null) {
+                System.out.println("Error: Gambar tidak ditemukan pada path: " + imagePath);
+            } else {
+                Image image = new Image(getClass().getResourceAsStream(imagePath));
+                imagePlaylist.setImage(image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     private void handleCardClick() {
