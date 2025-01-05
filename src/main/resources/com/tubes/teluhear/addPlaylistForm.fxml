@@ -4,11 +4,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistFormController">
+<AnchorPane prefHeight="165.0" prefWidth="240.0" style="-fx-background-color: ffe3e9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistFormController">
    <children>
-      <TextField fx:id="inputJudul" layoutX="227.0" layoutY="100.0" promptText="Judul Playlist" />
-      <Button layoutX="273.0" layoutY="200.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
-      <Button layoutX="227.0" layoutY="136.0" mnemonicParsing="false" onAction="#uploadImage" text="Upload Image" />
+      <TextField fx:id="inputJudul" alignment="CENTER" layoutX="48.0" layoutY="40.0" promptText="Judul Playlist" style="-fx-background-color: c8eaee; -fx-background-radius: 20;" />
+      <Button layoutX="96.0" layoutY="117.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: c8eaee; -fx-background-radius: 20;" text="Submit" textFill="#125c8d" />
+      <Button layoutX="77.0" layoutY="83.0" mnemonicParsing="false" onAction="#uploadImage" style="-fx-background-color: c8eaee; -fx-background-radius: 20;" text="Upload Image" textFill="#125c8d" />
    </children>
 </AnchorPane>

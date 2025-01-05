@@ -9,21 +9,21 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.MusicCardController">
    <children>
-      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="5.0" onMouseClicked="#onCardClicked" prefHeight="30.0" prefWidth="500.0" spacing="30.0" style="-fx-border-radius: 20px; -fx-border-style: solid;">
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="5.0" onMouseClicked="#onCardClicked" prefHeight="30.0" prefWidth="500.0" spacing="30.0" style="-fx-border-radius: 20px; -fx-background-color: a3b9d9; -fx-border-style: solid;">
          <children>
-            <Label fx:id="musicIndex" text="1.">
+            <Label fx:id="musicIndex" text="1." textFill="#ffe3e9">
                <font>
-                  <Font name="Poppins Regular" size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="musicJudul" text="Judul Lagu">
+            <Label fx:id="musicJudul" text="Judul Lagu" textFill="#ffe3e9">
                <font>
-                  <Font name="Poppins Regular" size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="musicArtist" text="Nama Artist">
+            <Label fx:id="musicArtist" text="Nama Artist" textFill="#ffe3e9">
                <font>
-                  <Font name="Poppins Regular" size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>

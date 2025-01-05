@@ -4,10 +4,9 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.AddPlaylistMusicFormController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: bdeaf2;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.AddPlaylistMusicFormController">
    <children>
-      <ChoiceBox fx:id="musicList" layoutX="225.0" layoutY="175.0" prefWidth="150.0" />
-      <Button layoutX="281.0" layoutY="217.0" mnemonicParsing="false" onAction="#addButton" text="Add" />
+      <ChoiceBox fx:id="musicList" layoutX="225.0" layoutY="175.0" prefWidth="150.0" style="-fx-background-color: #dce6f5;" />
+      <Button layoutX="281.0" layoutY="217.0" mnemonicParsing="false" onAction="#addButton" style="-fx-background-color: #dce6f5;" text="Add" textFill="#125c8d" />
    </children>
 </AnchorPane>

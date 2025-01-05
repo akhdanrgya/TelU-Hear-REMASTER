@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.HomeController">
    <children>
-      <Label text="Home" />
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: d3f2dc;">
+         <children>
+            <Label text="Welcome, User !" textFill="#a3b9d9">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="30.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label text="PLAYLIST" textFill="#417deb">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" />
+               </VBox.margin>
+            </Label>
+            <ScrollPane prefHeight="162.0" prefWidth="600.0" style="-fx-background-color: d3f2dc;" vbarPolicy="NEVER" />
+            <Label text="MUSIC" textFill="#417deb">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: d3f2dc;" />
+         </children>
+      </VBox>
    </children>
 </StackPane>
