@@ -20,7 +20,7 @@
                         <Button mnemonicParsing="false" onAction="#premiumButtonClick" style="-fx-background-color: #dcd3ff; -fx-background-radius: 20;" text="Premium" textFill="#2a58a8" />
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <StackPane prefHeight="200.0" prefWidth="200.0" />
+                              <StackPane fx:id="playedMusicArea" prefHeight="200.0" prefWidth="200.0" />
                            </children>
                         </AnchorPane>
                      </children>

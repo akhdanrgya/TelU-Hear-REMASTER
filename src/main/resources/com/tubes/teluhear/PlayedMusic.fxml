@@ -5,23 +5,28 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlayedMusicController">
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlayedMusicController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="20.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Label fx:id="Judul" text="Judul Lagu Nanti" />
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#Prev" text="Previous" />
-                  <Button mnemonicParsing="false" onAction="#Play" text="Play" />
-                  <Button mnemonicParsing="false" onAction="#Next" text="Next" />
+                  <Label fx:id="Judul" text="Judul Lagu Nanti" />
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#Prev" text="Previous" />
+                        <Button mnemonicParsing="false" onAction="#Play" text="Play" />
+                        <Button mnemonicParsing="false" onAction="#Next" text="Next" />
+                     </children>
+                  </HBox>
+                  <Slider fx:id="SliderMusic" prefHeight="14.0" prefWidth="165.0" />
                </children>
-            </HBox>
-            <Slider fx:id="SliderMusic" prefHeight="14.0" prefWidth="165.0" />
+            </VBox>
          </children>
-      </VBox>
+      </Pane>
    </children>
-</Pane>
+</StackPane>

@@ -56,14 +56,19 @@ public class MusicController implements Initializable {
             return;
         }
 
-        for (int i = 0; i < musicDataList.size(); i++) {
-            MusicModel music = musicDataList.get(i);
+        try {
+            FXMLLoader layoutLoader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/layout.fxml"));
+            Pane layoutView = layoutLoader.load();
+            LayoutController layoutController = layoutLoader.getController();
 
-            try {
+            for (int i = 0; i < musicDataList.size(); i++) {
+                MusicModel music = musicDataList.get(i);
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/MusicCard.fxml"));
                 Pane musicCardView = loader.load();
 
                 MusicCardController controller = loader.getController();
+                controller.setLayoutController(layoutController);
                 controller.setMusicData(music, i + 1);
 
                 controller.setClickListener(new MusicCardClickListener() {
@@ -75,12 +80,12 @@ public class MusicController implements Initializable {
                 });
 
                 musicGrid.add(musicCardView, 0, i);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
+
 
     public void setCurrentMusic(MusicModel music) {
         this.currentMusic = music;
