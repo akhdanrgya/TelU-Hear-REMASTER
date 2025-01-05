@@ -45,7 +45,6 @@ public class MusicController implements Initializable {
 
         musicList = musicDAO.getAllMusic();
 
-
         populateMusicGrid(musicList);
         System.out.println("MusicController initialized.");
         System.out.println(musicList.size());
@@ -70,7 +69,7 @@ public class MusicController implements Initializable {
 
                 controller.setClickListener(new MusicCardClickListener() {
                     @Override
-                    public void onMusicCardClicked(MusicModel clickedMusic, List<MusicModel> musicList) {
+                    public void onMusicCardClicked(MusicModel clickedMusic, List<MusicModel> musicModels) {
                         if (musicList == null || musicList.isEmpty()) {
                             System.out.println("Music list is empty or null.");
                             return;
