@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.MusicCardController">
    <children>
-      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="5.0" onMouseClicked="#onCardClicked" prefHeight="30.0" prefWidth="500.0" spacing="30.0" style="-fx-border-radius: 20px; -fx-background-color: a3b9d9; -fx-border-style: solid;">
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="5.0" onMouseClicked="#onCardClicked" prefHeight="30.0" prefWidth="500.0" spacing="30.0" style="-fx-border-radius: 20; -fx-background-color: a3b9d9; -fx-border-style: solid;">
          <children>
             <Label fx:id="musicIndex" text="1." textFill="#ffe3e9">
                <font>

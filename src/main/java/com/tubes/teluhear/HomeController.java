@@ -39,12 +39,15 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         playlistDAO = new PlaylistDAO(dbConnection.getConnection());
         musicDAO = new MusicDAO(dbConnection.getConnection());
+        String username = SessionManager.getInstance().getUsername();
 
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
         List<MusicModel> musicDataList = musicDAO.getAllMusic();
 
         populatePlaylist(playlistDataList);
         populateMusic(musicDataList);
+
+        welcomeText.setText("Welcome Back " + username + "!");
 
     }
 

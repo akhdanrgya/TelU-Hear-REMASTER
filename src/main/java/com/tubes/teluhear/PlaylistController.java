@@ -37,7 +37,6 @@ public class PlaylistController implements Initializable {
         playlistDAO = new PlaylistDAO(dbConnection.getConnection());
         userId = SessionManager.getInstance().getId();
 
-
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
 
         populatePlaylistGrid(playlistDataList);
