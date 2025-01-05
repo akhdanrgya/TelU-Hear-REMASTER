@@ -30,12 +30,6 @@ public class MusicController implements Initializable {
     private GridPane musicGrid;
 
     @FXML
-    private Slider musicSlider;
-
-    @FXML
-    private Label judulBawah;
-
-    @FXML
     private Button pauseText;
 
     private MusicDAO musicDAO;
@@ -74,7 +68,6 @@ public class MusicController implements Initializable {
                     public void onMusicCardClicked(MusicModel music) {
                         setCurrentMusic(music);
                         showPlayedMusic(music);
-//                        playButton();
                     }
                 });
 
@@ -90,74 +83,6 @@ public class MusicController implements Initializable {
         this.currentMusic = music;
     }
 
-    void playButton() {
-        if (currentMusic != null) {
-
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                mediaPlayer.dispose();
-            }
-
-            File file = new File(currentMusic.getFile_path());
-            if (file.exists()) {
-                Media media = new Media(file.toURI().toString());
-                mediaPlayer = new MediaPlayer(media);
-            } else {
-                URL resource = getClass().getResource("/" + currentMusic.getFile_path());
-                if (resource != null) {
-                    System.out.println("Playing: " + currentMusic.getFile_path());
-                    judulBawah.setText(currentMusic.getJudul());
-                    pauseText.setText("Pause");
-                    Media media = new Media(resource.toExternalForm());
-                    mediaPlayer = new MediaPlayer(media);
-                } else {
-                    System.out.println("Resource tidak valid bos: " + currentMusic.getFile_path());
-                }
-            }
-
-            if (mediaPlayer != null) {
-                mediaPlayer.play();
-            } else {
-                System.out.println("Failed to initialize mediaPlayer.");
-            }
-
-        } else {
-            judulBawah.setText("No music selected");
-        }
-    }
-
-
-    @FXML
-    void pauseButton(ActionEvent event) {
-        if (mediaPlayer != null) {
-            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-                mediaPlayer.pause();
-                pauseText.setText("Play");
-            } else if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
-                mediaPlayer.play();
-                pauseText.setText("Pause");
-            }
-        }
-    }
-
-
-    @FXML
-    void nextButton(ActionEvent event) {
-        if (currentMusic != null) {
-            System.out.println("Next: " + currentMusic.getFile_path());
-        } else {
-            System.out.println("No music selected");
-        }
-    }
-
-    @FXML
-    void previousButton(ActionEvent event) {
-        if (currentMusic != null) {
-            System.out.println("Prev: " + currentMusic.getFile_path());
-        } else {
-            System.out.println("No music selected");
-        }
-    }
 
     public void showPlayedMusic(MusicModel musicModel) {
         try {
