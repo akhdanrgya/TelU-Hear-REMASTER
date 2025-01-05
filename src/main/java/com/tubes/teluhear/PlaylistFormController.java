@@ -57,10 +57,8 @@ public class PlaylistFormController {
             System.out.println("Gagal menambahkan playlist");
         }
 
-//        tutup halaman form disini ...
-        // Menutup halaman (stage)
         Stage stage = (Stage) inputJudul.getScene().getWindow();
-        stage.close(); // Menutup jendela setelah submit
+        stage.close();
         playlistController.reloadPlaylist();
     }
 
@@ -68,19 +66,16 @@ public class PlaylistFormController {
     void uploadImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
 
-        // Filter hanya untuk file gambar
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
 
-        // Ambil window dari event
         Window window = inputJudul.getScene().getWindow();
 
         File selectedFile = fileChooser.showOpenDialog(window);
 
         if (selectedFile != null) {
             try {
-                // Path folder penyimpanan gambar
                 String resourcePath = "src/main/resources/image/";
                 File resourceFolder = new File(resourcePath);
 
@@ -88,24 +83,19 @@ public class PlaylistFormController {
                     throw new IOException("Gagal membuat folder: " + resourceFolder.getAbsolutePath());
                 }
 
-                // Sanitasi nama file
                 String sanitizedFileName = selectedFile.getName().replaceAll("[^a-zA-Z0-9._-]", "_");
 
-                // Lokasi file tujuan
                 File destinationFile = new File(resourceFolder, sanitizedFileName);
 
-                // Salin file
                 Files.copy(
                         selectedFile.toPath(),
                         destinationFile.toPath(),
                         StandardCopyOption.REPLACE_EXISTING
                 );
 
-                // Simpan path relatif untuk database
                 inputImagePath = "/image/" + sanitizedFileName;
 
-                // Tampilkan gambar ke ImageView
-                String imagePath = destinationFile.toURI().toString(); // Konversi ke URI agar bisa dibaca ImageView
+                String imagePath = destinationFile.toURI().toString();
                 gambarPlaylist.setImage(new Image(imagePath));
 
                 System.out.println("File berhasil diupload: " + inputImagePath);

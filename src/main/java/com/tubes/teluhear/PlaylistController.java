@@ -41,21 +41,16 @@ public class PlaylistController implements Initializable {
         reloadPlaylist();
     }
 
-    // Method untuk reload playlist dari database
     public void reloadPlaylist() {
-        // Ambil data playlist dari database
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
         System.out.println("Reloading playlist data: " + playlistDataList);
         File dir = new File("src/main/resources/image");
         File[] files = dir.listFiles();
         System.out.println(Arrays.toString(files));
-        // Bersihkan grid sebelumnya
         playlistGrid.getChildren().clear();
 
-        // Populate grid dengan playlist terbaru
         populatePlaylistGrid(playlistDataList);
 
-        // Mengatur button add berdasarkan jumlah playlist jika role "free"
         if (SessionManager.getInstance().getRole().equals("free")) {
             if (playlistDataList.size() > 1) {
                 addButton.setDisable(true);
@@ -113,8 +108,7 @@ public class PlaylistController implements Initializable {
             stage.setTitle("Add Playlist");
 
             stage.show();
-            // Tambahkan event handler setelah form ditutup
-            stage.setOnCloseRequest(event -> reloadPlaylist()); // Reload playlist setelah form ditutup
+            stage.setOnCloseRequest(event -> reloadPlaylist());
         } catch (IOException e) {
             e.printStackTrace();
         }

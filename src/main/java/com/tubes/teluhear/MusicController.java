@@ -7,18 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import com.tubes.teluhear.database.MusicModel;
 import com.tubes.teluhear.database.MusicDAO;
 import javafx.scene.layout.Pane;
-import javafx.event.ActionEvent;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;

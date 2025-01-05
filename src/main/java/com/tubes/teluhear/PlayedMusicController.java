@@ -36,7 +36,7 @@ public class PlayedMusicController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (musicList != null && !musicList.isEmpty()) {
-            setMusicData(musicList, currentIndex);  // Set musik pertama
+            setMusicData(musicList, currentIndex);
         }
 
         SliderMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -115,7 +115,6 @@ public class PlayedMusicController implements Initializable {
         }
     }
 
-    // Stop musik ketika window ditutup
     public void stopMusicOnClose(Stage stage) {
         stage.setOnCloseRequest(event -> {
             if (mediaPlayer != null) {

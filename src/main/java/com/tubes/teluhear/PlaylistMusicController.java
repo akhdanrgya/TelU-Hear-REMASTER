@@ -34,7 +34,7 @@ public class PlaylistMusicController implements Initializable {
 
     private MusicModel currentMusic;
 
-    private List<MusicModel> musicList;  // Tambahkan ini untuk menyimpan daftar musik
+    private List<MusicModel> musicList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,9 +48,9 @@ public class PlaylistMusicController implements Initializable {
         System.out.println("Setting Playlist ID: " + playlistId);
 
         List<PlaylistMusicModel> playlistMusicList = playlistMusicDAO.getPlaylistMusic(playlistId);
-        musicList = musicDAO.getMusicByIds(getMusicIdsFromPlaylist(playlistMusicList));  // Menyimpan musicList
+        musicList = musicDAO.getMusicByIds(getMusicIdsFromPlaylist(playlistMusicList));
 
-        populatePlaylistMusicListID(musicList);  // Gunakan musicList yang sudah diisi
+        populatePlaylistMusicListID(musicList);
     }
 
     private List<Integer> getMusicIdsFromPlaylist(List<PlaylistMusicModel> playlistMusicList) {
@@ -88,7 +88,7 @@ public class PlaylistMusicController implements Initializable {
 
                         if (selectedMusic != null) {
                             setCurrentMusic(selectedMusic);
-                            showPlayedMusic(selectedMusic, musicList);  // Kirim musicList juga
+                            showPlayedMusic(selectedMusic, musicList);
                         } else {
                             System.out.println("Music not found in the playlist.");
                         }
@@ -129,7 +129,7 @@ public class PlaylistMusicController implements Initializable {
         this.currentMusic = music;
     }
 
-    public void showPlayedMusic(MusicModel musicModel, List<MusicModel> musicList) {  // Terima musicList sebagai parameter
+    public void showPlayedMusic(MusicModel musicModel, List<MusicModel> musicList) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlayedMusic.fxml"));
             Parent root = loader.load();
