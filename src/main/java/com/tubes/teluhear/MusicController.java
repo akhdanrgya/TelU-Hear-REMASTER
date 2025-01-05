@@ -111,7 +111,8 @@ public class MusicController implements Initializable {
             PlayedMusicController controller = loader.getController();
 
             if (controller != null) {
-                controller.setMusicData(musicModel);
+                int index = musicList.indexOf(musicModel);
+                controller.setMusicData(musicList, index);
             } else {
                 System.out.println("Controller is null");
             }

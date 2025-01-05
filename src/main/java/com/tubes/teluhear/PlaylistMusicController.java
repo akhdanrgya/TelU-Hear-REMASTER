@@ -34,36 +34,30 @@ public class PlaylistMusicController implements Initializable {
 
     private MusicModel currentMusic;
 
+    private List<MusicModel> musicList;  // Tambahkan ini untuk menyimpan daftar musik
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         System.out.println("Is playlistMusicListView null in initialize? " + (playlistMusicListView == null));
-
-
         playlistMusicDAO = new PlaylistMusicDAO(dbConnection.getConnection());
         musicDAO = new MusicDAO(dbConnection.getConnection());
     }
 
     public void setPlaylistId(int playlistId) {
         this.playlistId = playlistId;
-
         System.out.println("Setting Playlist ID: " + playlistId);
 
         List<PlaylistMusicModel> playlistMusicList = playlistMusicDAO.getPlaylistMusic(playlistId);
+        musicList = musicDAO.getMusicByIds(getMusicIdsFromPlaylist(playlistMusicList));  // Menyimpan musicList
 
-        List<MusicModel> musicList = musicDAO.getMusicByIds(getMusicIdsFromPlaylist(playlistMusicList));
-
-        populatePlaylistMusicListID(musicList);
+        populatePlaylistMusicListID(musicList);  // Gunakan musicList yang sudah diisi
     }
 
     private List<Integer> getMusicIdsFromPlaylist(List<PlaylistMusicModel> playlistMusicList) {
         List<Integer> musicIds = new ArrayList<>();
-
         for (PlaylistMusicModel music : playlistMusicList) {
             musicIds.add(music.getIdMusic());
         }
-
         return musicIds;
     }
 
@@ -94,7 +88,7 @@ public class PlaylistMusicController implements Initializable {
 
                         if (selectedMusic != null) {
                             setCurrentMusic(selectedMusic);
-                            showPlayedMusic(selectedMusic);
+                            showPlayedMusic(selectedMusic, musicList);  // Kirim musicList juga
                         } else {
                             System.out.println("Music not found in the playlist.");
                         }
@@ -108,9 +102,6 @@ public class PlaylistMusicController implements Initializable {
         }
     }
 
-
-
-
     @FXML
     void addMusic(ActionEvent event) {
         goToForm();
@@ -122,7 +113,6 @@ public class PlaylistMusicController implements Initializable {
             Pane root = loader.load();
 
             AddPlaylistMusicFormController controller = loader.getController();
-
             controller.setPlaylistId(playlistId);
 
             Scene scene = new Scene(root);
@@ -139,16 +129,17 @@ public class PlaylistMusicController implements Initializable {
         this.currentMusic = music;
     }
 
-    public void showPlayedMusic(MusicModel musicModel) {
+    public void showPlayedMusic(MusicModel musicModel, List<MusicModel> musicList) {  // Terima musicList sebagai parameter
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlayedMusic.fxml"));
-
             Parent root = loader.load();
 
             PlayedMusicController controller = loader.getController();
 
             if (controller != null) {
-                controller.setMusicData(musicModel);
+                int index = musicList.indexOf(musicModel);
+                System.out.println(musicList.size());
+                controller.setMusicData(musicList, index);
             } else {
                 System.out.println("Controller is null");
             }
@@ -164,6 +155,4 @@ public class PlaylistMusicController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 }

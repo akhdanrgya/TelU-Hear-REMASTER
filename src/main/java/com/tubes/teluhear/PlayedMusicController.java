@@ -1,9 +1,6 @@
 package com.tubes.teluhear;
 
-import com.tubes.teluhear.database.MusicDAO;
 import com.tubes.teluhear.database.MusicModel;
-
-import com.tubes.teluhear.database.dbConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Connection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,19 +30,13 @@ public class PlayedMusicController implements Initializable {
     private MediaPlayer mediaPlayer;
     private List<MusicModel> musicList;
     private int currentIndex = 0;
-    private MusicDAO musicDAO;
     private MusicModel currentMusic;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        Connection connection = dbConnection.getConnection();
-        musicDAO = new MusicDAO(connection);
-
-        musicList = musicDAO.getAllMusic();
-
-        if (!musicList.isEmpty()) {
-            setMusicData(musicList.get(currentIndex));
+        if (musicList != null && !musicList.isEmpty()) {
+            setMusicData(musicList, currentIndex);  // Set musik pertama
         }
 
         SliderMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -56,9 +46,13 @@ public class PlayedMusicController implements Initializable {
         });
     }
 
-    public void setMusicData(MusicModel musicData) {
-        Judul.setText(musicData.getJudul());
-        setCurrentMusic(musicData);
+    public void setMusicData(List<MusicModel> musicList, int index) {
+        if (musicList != null && !musicList.isEmpty() && index >= 0 && index < musicList.size()) {
+            MusicModel musicData = musicList.get(index);
+            Judul.setText(musicData.getJudul());
+            setCurrentMusic(musicData);
+            this.musicList = musicList;
+        }
     }
 
     public void setCurrentMusic(MusicModel music) {
@@ -92,7 +86,7 @@ public class PlayedMusicController implements Initializable {
     void Next(ActionEvent event) {
         if (musicList != null && !musicList.isEmpty()) {
             currentIndex = (currentIndex + 1) % musicList.size();
-            setMusicData(musicList.get(currentIndex));
+            setMusicData(musicList, currentIndex);
             mediaPlayer.play();
             pauseText.setText("Pause");
         }
@@ -102,7 +96,7 @@ public class PlayedMusicController implements Initializable {
     void Prev(ActionEvent event) {
         if (musicList != null && !musicList.isEmpty()) {
             currentIndex = (currentIndex - 1 + musicList.size()) % musicList.size();
-            setMusicData(musicList.get(currentIndex));
+            setMusicData(musicList, currentIndex);
             mediaPlayer.play();
             pauseText.setText("Pause");
         }
@@ -121,6 +115,7 @@ public class PlayedMusicController implements Initializable {
         }
     }
 
+    // Stop musik ketika window ditutup
     public void stopMusicOnClose(Stage stage) {
         stage.setOnCloseRequest(event -> {
             if (mediaPlayer != null) {
