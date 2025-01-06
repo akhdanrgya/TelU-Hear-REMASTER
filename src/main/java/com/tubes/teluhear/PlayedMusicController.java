@@ -55,7 +55,6 @@ public class PlayedMusicController implements Initializable {
             prevBtn.setDisable(true);
             nextBtn.setDisable(true);
         }
-
     }
 
     public void setMusicData(List<MusicModel> musicList, int index) {
@@ -135,4 +134,6 @@ public class PlayedMusicController implements Initializable {
             }
         });
     }
+
+
 }
