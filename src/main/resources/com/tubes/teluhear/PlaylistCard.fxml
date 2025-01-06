@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="220.0" style="-fx-background-color: bdeaf2; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistCardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleCardClick" prefHeight="215.0" prefWidth="220.0" style="-fx-background-color: bdeaf2; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistCardController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="240.0" prefWidth="220.0" spacing="20.0">
+      <VBox alignment="CENTER" prefHeight="240.0" prefWidth="220.0" spacing="20.0">
          <children>
-            <ImageView fx:id="imagePlaylist" fitHeight="164.0" fitWidth="197.0" onMouseClicked="#handleCardClick" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../image/plus.jpg" />
-               </image>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </ImageView>
             <Label fx:id="judulPlaylist" alignment="CENTER" contentDisplay="CENTER" prefHeight="13.0" prefWidth="172.0" text="JUDUL PLAYLIST" textFill="#004190">
                <font>
                   <Font name="Times New Roman Bold" size="20.0" />
                </font></Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#delete" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#edit" text="Edit" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

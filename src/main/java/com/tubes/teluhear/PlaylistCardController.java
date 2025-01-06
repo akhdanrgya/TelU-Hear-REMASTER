@@ -1,6 +1,9 @@
 package com.tubes.teluhear;
 
+import com.tubes.teluhear.database.PlaylistDAO;
 import com.tubes.teluhear.database.PlaylistModel;
+import com.tubes.teluhear.database.dbConnection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,25 +24,16 @@ public class PlaylistCardController {
 
     private PlaylistModel playlistData;
 
+    private PlaylistDAO playlistDAO;
+
+    public PlaylistCardController() {
+        this.playlistDAO = new PlaylistDAO(dbConnection.getConnection());
+    }
+
 
     public void setPlaylistData(PlaylistModel playlist) {
         this.playlistData = playlist;
         judulPlaylist.setText(playlist.getPlaylist_name());
-
-        String imagePath = playlist.getImage();
-
-        System.out.println("Image Path: " + imagePath);
-
-        try {
-            if (getClass().getResourceAsStream(imagePath) == null) {
-                System.out.println("Error: Gambar tidak ditemukan pada path: " + imagePath);
-            } else {
-                Image image = new Image(getClass().getResourceAsStream(imagePath));
-                imagePlaylist.setImage(image);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -57,6 +51,30 @@ public class PlaylistCardController {
             stage.setTitle("Playlist Music");
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void delete(ActionEvent event) {
+        playlistDAO.deletePlaylist(playlistData.getId());
+    }
+
+    @FXML
+    void edit(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/editPlaylistForm.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            EditPlaylistController controller = loader.getController();
+            controller.setPlaylist(playlistData.getId(), playlistData.getPlaylist_name());
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Edit Playlist");
+            stage.show();
+
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
