@@ -54,5 +54,18 @@ public class UserDAO {
         return -1;
     }
 
+    public boolean isUsernameExists(String username) {
+        String sql = "SELECT 1 FROM users WHERE username = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next(); // True kalau username ada
+        } catch (SQLException e) {
+            System.out.println("Error checking username: " + e.getMessage());
+            return false; // Default false kalau ada error
+        }
+    }
+
+
 
 }

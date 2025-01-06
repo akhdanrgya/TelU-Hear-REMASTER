@@ -61,6 +61,8 @@ public class RegisterController {
             alertR.setText("Username atau Password tidak boleh kosong");
         } else if (!password.equals(confirmPassword)) {
             alertR.setText("Password dan Konfirmasi Password tidak cocok");
+        } else if (UserDAO.isUsernameExists(username)) {
+            alertR.setText("Username sudah digunakan. Silakan pilih username lain.");
         } else {
             UserModel user = new UserModel(username, password);
             boolean isRegisterSuccess = UserDAO.register(user);
@@ -68,7 +70,7 @@ public class RegisterController {
             if (isRegisterSuccess) {
                 alertR.setText("Registrasi berhasil! Silakan login.");
             } else {
-                alertR.setText("Registrasi gagal. Username mungkin sudah digunakan.");
+                alertR.setText("Registrasi gagal. Coba lagi.");
             }
         }
     }
