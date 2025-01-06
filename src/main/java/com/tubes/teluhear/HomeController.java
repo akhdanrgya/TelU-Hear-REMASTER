@@ -10,9 +10,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +37,10 @@ public class HomeController implements Initializable {
     private PlaylistDAO playlistDAO;
     private MusicDAO musicDAO;
 
+    private List<MusicModel> musicList;
+    private MusicModel currentMusic;
+    private MediaPlayer mediaPlayer;
+
     private int userId = SessionManager.getInstance().getId();
 
 
@@ -43,6 +51,8 @@ public class HomeController implements Initializable {
 
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
         List<MusicModel> musicDataList = musicDAO.getAllMusic();
+
+        musicList = musicDataList;
 
         populatePlaylist(playlistDataList);
         populateMusic(musicDataList);
@@ -100,6 +110,28 @@ public class HomeController implements Initializable {
                 MusicCardController musicCardController = loader.getController();
                 musicCardController.setMusicData(musicModel, i + 1, false);
 
+                musicCardController.setClickListener(new MusicCardClickListener() {
+                    @Override
+                    public void onMusicCardClicked(MusicModel clickedMusic, List<MusicModel> musicModels) {
+                        if (musicList == null || musicList.isEmpty()) {
+                            System.out.println("Music list is empty or null.");
+                            return;
+                        }
+
+                        MusicModel selectedMusic = musicList.stream()
+                                .filter(m -> m.getId() == clickedMusic.getId())
+                                .findFirst()
+                                .orElse(null);
+
+                        if (selectedMusic != null) {
+                            setCurrentMusic(selectedMusic);
+                            showPlayedMusic(selectedMusic);
+                        } else {
+                            System.out.println("Music not found in musicList.");
+                        }
+                    }
+                });
+
                 musicGrid.add(musicCardView, column, row);
 
                 row++;
@@ -108,6 +140,37 @@ public class HomeController implements Initializable {
             }
         }
 
+    }
+
+    public void setCurrentMusic(MusicModel music) {
+        this.currentMusic = music;
+    }
+
+    public void showPlayedMusic(MusicModel musicModel) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlayedMusic.fxml"));
+
+            Parent root = loader.load();
+
+            PlayedMusicController controller = loader.getController();
+
+            if (controller != null) {
+                int index = musicList.indexOf(musicModel);
+                controller.setMusicData(musicList, index);
+            } else {
+                System.out.println("Controller is null");
+            }
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            controller.stopMusicOnClose(stage);
+            stage.setScene(scene);
+            stage.setTitle("Played Music");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

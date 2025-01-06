@@ -76,11 +76,9 @@ public class MusicCardController implements Initializable {
 
     @FXML
     private void onCardClicked(MouseEvent event) {
-
         if (clickListener != null) {
             clickListener.onMusicCardClicked(musicData, musicList);
         }
-
     }
 
     @FXML
