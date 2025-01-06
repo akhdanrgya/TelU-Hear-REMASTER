@@ -4,17 +4,16 @@ import com.tubes.teluhear.database.PlaylistDAO;
 import com.tubes.teluhear.database.dbConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class EditPlaylistController {
 
     @FXML
-    private ImageView gambarPlaylist;
+    private TextField inputJudul;
 
     @FXML
-    private TextField inputJudul;
+    private Label alertMessage;
 
     private PlaylistDAO playlistDAO;
 
@@ -30,19 +29,25 @@ public class EditPlaylistController {
         this.judul = judul;
 
         inputJudul.setText(judul);
-
     }
 
     @FXML
     void submit(ActionEvent event) {
-        String editedJudul = inputJudul.getText();
+        String editedJudul = inputJudul.getText().trim();
 
-        playlistDAO.updatePlaylist(playlistId, judul);
+        // Cek apakah ada perubahan pada judul
+        if (editedJudul.isEmpty()) {
+            alertMessage.setText("Judul tidak boleh kosong!");
+        } else if (editedJudul.equals(judul)) {
+            alertMessage.setText("Tidak ada perubahan pada judul");
+        } else {
+            boolean isUpdated = playlistDAO.updatePlaylist(playlistId, editedJudul);
+            if (isUpdated) {
+                alertMessage.setText("Playlist berhasil diperbarui!");
+                this.judul = editedJudul;
+            } else {
+                alertMessage.setText("Gagal memperbarui playlist.");
+            }
+        }
     }
-
-    @FXML
-    void uploadImage(ActionEvent event) {
-
-    }
-
 }

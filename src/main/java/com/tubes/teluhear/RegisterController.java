@@ -1,6 +1,5 @@
 package com.tubes.teluhear;
 
-
 import com.tubes.teluhear.database.UserDAO;
 import com.tubes.teluhear.database.UserModel;
 import com.tubes.teluhear.database.dbConnection;
