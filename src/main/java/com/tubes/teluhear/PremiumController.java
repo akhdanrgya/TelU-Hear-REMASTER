@@ -33,7 +33,6 @@ public class PremiumController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         role = SessionManager.getInstance().getRole();
-        System.out.println(role);
         if (role.equals("premium")) {
             premiumLabel1.setVisible(false);
             premiumLabel2.setText("Akun anda sudah Premium");
