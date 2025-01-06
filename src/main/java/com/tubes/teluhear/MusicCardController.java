@@ -43,10 +43,6 @@ public class MusicCardController implements Initializable {
 
     private List<MusicModel> musicList;
 
-    private boolean btn;
-
-    private int musicSelectedId;
-
     private int playlistId;
 
     @Override
@@ -68,9 +64,7 @@ public class MusicCardController implements Initializable {
 
     public void setMusicList(List<MusicModel> musicList) {
         this.musicList = musicList;
-        this.musicSelectedId = musicList.get(0).getId();
     }
-
 
     public void setClickListener(MusicCardClickListener clickListener) {
         this.clickListener = clickListener;
