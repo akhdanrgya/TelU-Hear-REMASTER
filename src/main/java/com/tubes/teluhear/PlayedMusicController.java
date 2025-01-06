@@ -27,6 +27,12 @@ public class PlayedMusicController implements Initializable {
     @FXML
     private Button pauseText;
 
+    @FXML
+    private Button prevBtn;
+
+    @FXML
+    private Button nextBtn;
+
     private MediaPlayer mediaPlayer;
     private List<MusicModel> musicList;
     private int currentIndex = 0;
@@ -44,6 +50,12 @@ public class PlayedMusicController implements Initializable {
                 mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(newValue.doubleValue() / 100));
             }
         });
+
+        if (SessionManager.getInstance().getRole().equals("free")) {
+            prevBtn.setDisable(true);
+            nextBtn.setDisable(true);
+        }
+
     }
 
     public void setMusicData(List<MusicModel> musicList, int index) {
