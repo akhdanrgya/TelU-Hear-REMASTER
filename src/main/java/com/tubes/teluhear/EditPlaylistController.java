@@ -35,7 +35,6 @@ public class EditPlaylistController {
     void submit(ActionEvent event) {
         String editedJudul = inputJudul.getText().trim();
 
-        // Cek apakah ada perubahan pada judul
         if (editedJudul.isEmpty()) {
             alertMessage.setText("Judul tidak boleh kosong!");
         } else if (editedJudul.equals(judul)) {
