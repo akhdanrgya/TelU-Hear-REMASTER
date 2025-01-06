@@ -1,13 +1,11 @@
 package com.tubes.teluhear;
 
 import com.tubes.teluhear.database.MusicDAO;
-import com.tubes.teluhear.database.MusicModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;

@@ -28,11 +28,9 @@ public class PlaylistCardController {
 
         String imagePath = playlist.getImage();
 
-        // Log untuk mengecek nilai imagePath
         System.out.println("Image Path: " + imagePath);
 
         try {
-            // Memastikan input stream tidak null
             if (getClass().getResourceAsStream(imagePath) == null) {
                 System.out.println("Error: Gambar tidak ditemukan pada path: " + imagePath);
             } else {
