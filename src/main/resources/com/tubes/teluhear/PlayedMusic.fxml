@@ -6,18 +6,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlayedMusicController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="20.0">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #dce6f5;">
          <children>
-            <Label fx:id="Judul" text="Judul Lagu Nanti" />
+            <Label fx:id="Judul" text="Judul Lagu Nanti">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#Prev" text="Previous" />
-                  <Button mnemonicParsing="false" onAction="#Play" text="Play" />
-                  <Button mnemonicParsing="false" onAction="#Next" text="Next" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Prev" style="-fx-background-radius: 20; -fx-background-color: b6ceee;" text="Previous">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Play" style="-fx-background-radius: 20; -fx-background-color: b6ceee;" text="Play">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Next" style="-fx-background-radius: 20; -fx-background-color: b6ceee;" text="Next">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
                </children>
             </HBox>
             <Slider fx:id="SliderMusic" prefHeight="14.0" prefWidth="165.0" />
