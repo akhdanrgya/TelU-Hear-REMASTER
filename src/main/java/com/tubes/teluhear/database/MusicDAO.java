@@ -88,7 +88,7 @@ public class MusicDAO {
 
     public int getMusicIdByJudul(String judul) {
         String sql = "SELECT id FROM music WHERE judul = ?";
-        int musicId = -1; // default value jika tidak ditemukan
+        int musicId = -1;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, judul);
             ResultSet rs = stmt.executeQuery();
