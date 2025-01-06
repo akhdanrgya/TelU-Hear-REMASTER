@@ -12,7 +12,7 @@ public class App extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 955, 600);
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Login TeluHear!");
             stage.setScene(scene);
             stage.show();
