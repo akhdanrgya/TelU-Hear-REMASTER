@@ -1,9 +1,13 @@
 package com.tubes.teluhear;
 
+import com.tubes.teluhear.database.PlaylistDAO;
 import com.tubes.teluhear.database.PlaylistModel;
+import com.tubes.teluhear.database.dbConnection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,16 +25,31 @@ public class PlaylistCardController {
 
     private PlaylistModel playlistData;
 
+    private PlaylistDAO playlistDAO;
 
-    public void setPlaylistData(PlaylistModel playlist) {
+    @FXML
+    private Button deleteBtn;
+
+    @FXML
+    private Button editBtn;
+
+    private boolean btn;
+
+    public PlaylistCardController() {
+        this.playlistDAO = new PlaylistDAO(dbConnection.getConnection());
+    }
+
+
+    public void setPlaylistData(PlaylistModel playlist, boolean btn) {
         this.playlistData = playlist;
         judulPlaylist.setText(playlist.getPlaylist_name());
 
-        String imagePath = playlist.getImage();
-
-        Image image = new Image(getClass().getResourceAsStream(imagePath));
-        imagePlaylist.setImage(image);
+        if(!btn){
+            editBtn.setVisible(false);
+            deleteBtn.setVisible(false);
+        }
     }
+
 
     @FXML
     private void handleCardClick() {
@@ -46,6 +65,30 @@ public class PlaylistCardController {
             stage.setTitle("Playlist Music");
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void delete(ActionEvent event) {
+        playlistDAO.deletePlaylist(playlistData.getId());
+    }
+
+    @FXML
+    void edit(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/editPlaylistForm.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            EditPlaylistController controller = loader.getController();
+            controller.setPlaylist(playlistData.getId(), playlistData.getPlaylist_name());
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Edit Playlist");
+            stage.show();
+
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }

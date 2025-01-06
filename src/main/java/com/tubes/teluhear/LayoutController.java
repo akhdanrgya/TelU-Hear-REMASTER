@@ -1,5 +1,6 @@
 package com.tubes.teluhear;
 
+import com.tubes.teluhear.database.MusicDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,18 +21,20 @@ public class LayoutController implements Initializable {
     @FXML
     private StackPane contentArea;
 
+    @FXML
+    private StackPane playedMusicArea;
 
-    public void initialize (URL location, ResourceBundle resources){
+    private MusicDAO musicDAO;
 
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("playedMusicArea: " + playedMusicArea);  // Debugging
         try {
             Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/home.fxml"));
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
-
         } catch (IOException ex) {
             Logger.getLogger(LayoutController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public void homeButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
@@ -41,7 +44,9 @@ public class LayoutController implements Initializable {
     }
 
     public void musicButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/teluhear/music.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/music.fxml"));
+        Parent fxml = loader.load();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
@@ -57,6 +62,5 @@ public class LayoutController implements Initializable {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
-
 
 }

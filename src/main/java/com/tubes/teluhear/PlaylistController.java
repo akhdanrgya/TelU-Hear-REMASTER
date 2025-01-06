@@ -13,8 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,14 +32,22 @@ public class PlaylistController implements Initializable {
     private Button addButton;
 
     private PlaylistDAO playlistDAO;
-
     private int userId;
 
     public void initialize(URL url, ResourceBundle rb) {
         playlistDAO = new PlaylistDAO(dbConnection.getConnection());
         userId = SessionManager.getInstance().getId();
 
+        reloadPlaylist();
+    }
+
+    public void reloadPlaylist() {
         List<PlaylistModel> playlistDataList = playlistDAO.getPlaylistByUser(userId);
+        System.out.println("Reloading playlist data: " + playlistDataList);
+        File dir = new File("src/main/resources/image");
+        File[] files = dir.listFiles();
+        System.out.println(Arrays.toString(files));
+        playlistGrid.getChildren().clear();
 
         populatePlaylistGrid(playlistDataList);
 
@@ -46,7 +56,6 @@ public class PlaylistController implements Initializable {
                 addButton.setDisable(true);
             }
         }
-
     }
 
     private void populatePlaylistGrid(List<PlaylistModel> playlistModelList) {
@@ -55,18 +64,19 @@ public class PlaylistController implements Initializable {
             return;
         }
 
+        System.out.println(playlistModelList);
+
         int column = 0;
         int row = 0;
 
-        for (int i = 0; i < playlistModelList.size(); i++) {
-            PlaylistModel playlist = playlistModelList.get(i);
-
+        for (PlaylistModel playlist : playlistModelList) {
             try {
+                System.out.println(playlist);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/PlaylistCard.fxml"));
                 Pane playlistCardView = loader.load();
 
                 PlaylistCardController controller = loader.getController();
-                controller.setPlaylistData(playlist);
+                controller.setPlaylistData(playlist, true);
 
                 playlistGrid.add(playlistCardView, column, row);
                 playlistGrid.setMargin(playlistCardView, new Insets(10));
@@ -83,11 +93,9 @@ public class PlaylistController implements Initializable {
         }
     }
 
-
     public void addPlaylist(ActionEvent actionEvent) {
         System.out.println("Add Playlist");
         goToForm();
-
     }
 
     private void goToForm() {
@@ -98,7 +106,9 @@ public class PlaylistController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Add Playlist");
+
             stage.show();
+            stage.setOnCloseRequest(event -> reloadPlaylist());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -22,7 +22,6 @@ public class PlaylistDAO {
                 PlaylistModel playlist = new PlaylistModel(
                         rs.getInt("id_user"),
                         rs.getString("playlist_name"),
-                        rs.getString("image"),
                         rs.getInt("id")
                 );
                 playlistList.add(playlist);
@@ -35,11 +34,10 @@ public class PlaylistDAO {
     }
 
     public boolean addPlaylist(PlaylistModel playlist) {
-        String sql = "INSERT INTO playlist (id_user, playlist_name, image) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO playlist (id_user, playlist_name) VALUES (?, ?, )";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, playlist.getUser_id());
             stmt.setString(2, playlist.getPlaylist_name());
-            stmt.setString(3, playlist.getImage());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error adding playlist: " + e.getMessage());
@@ -68,7 +66,6 @@ public class PlaylistDAO {
                     PlaylistModel playlist = new PlaylistModel(
                             rs.getInt("id_user"),
                             rs.getString("playlist_name"),
-                            rs.getString("image"),
                             rs.getInt("id")
                     );
                     playlistList.add(playlist);
@@ -79,6 +76,18 @@ public class PlaylistDAO {
             throw new RuntimeException(e);
         }
         return playlistList;
+    }
+
+    public boolean updatePlaylist(int id, String playlist_name) {
+        String sql = "UPDATE playlist SET playlist_name = ?  WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, playlist_name);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error updating playlist: " + e.getMessage());
+            return false;
+        }
     }
 
 

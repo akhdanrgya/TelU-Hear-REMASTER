@@ -4,12 +4,10 @@ public class PlaylistModel {
     private int id;
     private int user_id;
     private String playlist_name;
-    private String image;
 
-    public PlaylistModel(int user_id, String playlist_name, String image, int id) {
+    public PlaylistModel(int user_id, String playlist_name, int id) {
         this.user_id = user_id;
         this.playlist_name = playlist_name;
-        this.image = image;
         this.id = id;
     }
 
@@ -29,13 +27,6 @@ public class PlaylistModel {
         this.playlist_name = playlist_name;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public int getId() {
         return id;
@@ -50,7 +41,6 @@ public class PlaylistModel {
         return "PlaylistModel{" +
                 "user_id=" + user_id +
                 ", playlist_name='" + playlist_name + '\'' +
-                ", image='" + image + '\'' +
                 '}';
     }
 

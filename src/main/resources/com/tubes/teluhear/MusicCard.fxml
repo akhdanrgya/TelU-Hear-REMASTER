@@ -2,14 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.MusicCardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onCardClicked" prefHeight="50.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.MusicCardController">
    <children>
-      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="5.0" onMouseClicked="#onCardClicked" prefHeight="30.0" prefWidth="500.0" spacing="30.0" style="-fx-border-radius: 20; -fx-background-color: a3b9d9; -fx-border-style: solid;">
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="500.0" spacing="30.0" style="-fx-border-radius: 20; -fx-background-color: a3b9d9; -fx-border-style: solid;">
          <children>
             <Label fx:id="musicIndex" text="1." textFill="#ffe3e9">
                <font>
@@ -26,6 +27,11 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#delete" text="Delete" />
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
