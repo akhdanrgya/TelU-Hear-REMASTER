@@ -75,8 +75,9 @@ public class PlaylistMusicController implements Initializable {
                 Pane musicCardView = loader.load();
 
                 MusicCardController controller = loader.getController();
-                controller.setMusicData(music, i + 1);
+                controller.setMusicData(music, i + 1, true);
                 controller.setMusicList(musicList);
+                controller.setPlaylistId(playlistId);
 
                 controller.setClickListener(new MusicCardClickListener() {
                     @Override

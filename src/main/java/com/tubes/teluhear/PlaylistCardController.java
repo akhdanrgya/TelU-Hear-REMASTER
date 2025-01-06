@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,14 +27,27 @@ public class PlaylistCardController {
 
     private PlaylistDAO playlistDAO;
 
+    @FXML
+    private Button deleteBtn;
+
+    @FXML
+    private Button editBtn;
+
+    private boolean btn;
+
     public PlaylistCardController() {
         this.playlistDAO = new PlaylistDAO(dbConnection.getConnection());
     }
 
 
-    public void setPlaylistData(PlaylistModel playlist) {
+    public void setPlaylistData(PlaylistModel playlist, boolean btn) {
         this.playlistData = playlist;
         judulPlaylist.setText(playlist.getPlaylist_name());
+
+        if(!btn){
+            editBtn.setVisible(false);
+            deleteBtn.setVisible(false);
+        }
     }
 
 

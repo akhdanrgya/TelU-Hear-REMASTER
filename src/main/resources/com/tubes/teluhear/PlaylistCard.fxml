@@ -17,8 +17,8 @@
                </font></Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#delete" text="Delete" />
-                  <Button mnemonicParsing="false" onAction="#edit" text="Edit" />
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#delete" text="Delete" />
+                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#edit" text="Edit" />
                </children>
             </HBox>
          </children>

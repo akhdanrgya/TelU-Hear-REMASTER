@@ -68,7 +68,7 @@ public class HomeController implements Initializable {
                 Pane playlistCardView = loader.load();
 
                 PlaylistCardController playlistCardController = loader.getController();
-                playlistCardController.setPlaylistData(playlistModel);
+                playlistCardController.setPlaylistData(playlistModel, false);
 
                 playlistGrid.add(playlistCardView, column, row);
                 playlistGrid.setMargin(playlistCardView, new Insets(10));
@@ -98,7 +98,7 @@ public class HomeController implements Initializable {
                 Pane musicCardView = loader.load();
 
                 MusicCardController musicCardController = loader.getController();
-                musicCardController.setMusicData(musicModel, i + 1);
+                musicCardController.setMusicData(musicModel, i + 1, false);
 
                 musicGrid.add(musicCardView, column, row);
 

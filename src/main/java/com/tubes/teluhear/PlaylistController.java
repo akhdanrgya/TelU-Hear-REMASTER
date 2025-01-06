@@ -76,7 +76,7 @@ public class PlaylistController implements Initializable {
                 Pane playlistCardView = loader.load();
 
                 PlaylistCardController controller = loader.getController();
-                controller.setPlaylistData(playlist);
+                controller.setPlaylistData(playlist, true);
 
                 playlistGrid.add(playlistCardView, column, row);
                 playlistGrid.setMargin(playlistCardView, new Insets(10));
