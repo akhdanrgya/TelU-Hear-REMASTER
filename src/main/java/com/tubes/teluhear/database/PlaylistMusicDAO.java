@@ -64,5 +64,17 @@ public class PlaylistMusicDAO {
         }
     }
 
+    public boolean deleteAllPlaylistMusic(int idPlaylist) {
+        String sql = "DELETE FROM playlist_music WHERE id_playlist = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idPlaylist);
+            System.out.println("Deleting playlist music with id_playlist: " + idPlaylist);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error deleting playlist music: " + e.getMessage());
+            return false;
+        }
+    }
+
 
 }

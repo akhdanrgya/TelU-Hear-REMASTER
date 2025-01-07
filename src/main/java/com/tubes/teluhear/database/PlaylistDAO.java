@@ -10,8 +10,11 @@ import java.util.List;
 public class PlaylistDAO {
     private Connection connection;
 
+    private PlaylistMusicDAO playlistMusicDAO;
+
     public PlaylistDAO(Connection connection) {
         this.connection = connection;
+        this.playlistMusicDAO = new PlaylistMusicDAO(connection);
     }
 
     public List<PlaylistModel> getPlaylist() {
@@ -46,6 +49,7 @@ public class PlaylistDAO {
     }
 
     public boolean deletePlaylist(int id) {
+        playlistMusicDAO.deleteAllPlaylistMusic(id);
         String sql = "DELETE FROM playlist WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
