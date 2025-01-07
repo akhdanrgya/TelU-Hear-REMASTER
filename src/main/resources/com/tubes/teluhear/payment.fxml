@@ -6,17 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="164.0" prefWidth="231.0" style="-fx-background-color: fbffd8; -fx-background-radius: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.tubes.teluhear.PaymentController">
+<AnchorPane id="AnchorPane" prefHeight="164.0" prefWidth="231.0" style="-fx-background-color: fbffd8; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PaymentController">
    <children>
       <Label layoutX="28.0" layoutY="34.0" text="HARGA PREMIUM : 1.000.000">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="65.0" layoutY="101.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" style="-fx-background-radius: 20;" text="BAYAR" />
-      <TextField layoutX="32.0" layoutY="70.0" prefHeight="25.0" prefWidth="161.0" style="-fx-background-radius: 20;" text="uang pembayaran. . . " />
-      <Button layoutX="157.0" layoutY="126.0" mnemonicParsing="false" style="-fx-background-radius: 20;" text="CANCEL" />
+      <Button layoutX="65.0" layoutY="101.0" mnemonicParsing="false" onAction="#handlePaymentAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-radius: 20;" text="BAYAR" />
+      <TextField fx:id="paymentField" layoutX="32.0" layoutY="70.0" prefHeight="25.0" prefWidth="161.0" promptText="uang pembayaran. . . " style="-fx-background-radius: 20;" />
+      <Button layoutX="157.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleCancelAction" style="-fx-background-radius: 20;" text="CANCEL" />
       <Label layoutX="12.0" layoutY="51.0" text="masukkan angka saja tanpa tanda baca" />
    </children>
 </AnchorPane>

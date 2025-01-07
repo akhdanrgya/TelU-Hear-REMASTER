@@ -48,13 +48,11 @@ public class PremiumController implements Initializable {
     void premiumButton(ActionEvent event) {
         idUser = SessionManager.getInstance().getId();
 
-        // Membuka payment.fxml jika tombol Premium ditekan
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/payment.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(loader.load());
 
-            // Mengirim idUser ke PaymentController
             PaymentController paymentController = loader.getController();
             paymentController.setIdUser(idUser);
 
@@ -65,15 +63,15 @@ public class PremiumController implements Initializable {
             System.out.println("Error loading payment.fxml: " + e.getMessage());
         }
 
-        try {
-            subsDAO.addSubs(idUser);
-            premiumLabel1.setVisible(false);
-            premiumLabel2.setText("Akun anda sudah Premium");
-            premiumButtonAction.setVisible(false);
-            SessionManager.getInstance().setRole("premium");
-        } catch (Exception e) {
-            System.out.println("Error adding subscription" + e.getMessage());
-        }
+//        try {
+//            subsDAO.addSubs(idUser);
+//            premiumLabel1.setVisible(false);
+//            premiumLabel2.setText("Akun anda sudah Premium");
+//            premiumButtonAction.setVisible(false);
+//            SessionManager.getInstance().setRole("premium");
+//        } catch (Exception e) {
+//            System.out.println("Error adding subscription" + e.getMessage());
+//        }
     }
 
 }
