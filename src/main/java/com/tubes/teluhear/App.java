@@ -14,6 +14,7 @@ public class App extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Login TeluHear!");
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
