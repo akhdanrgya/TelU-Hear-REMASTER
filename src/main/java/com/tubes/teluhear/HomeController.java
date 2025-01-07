@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -39,7 +38,6 @@ public class HomeController implements Initializable {
 
     private List<MusicModel> musicList;
     private MusicModel currentMusic;
-    private MediaPlayer mediaPlayer;
 
     private int userId = SessionManager.getInstance().getId();
 
