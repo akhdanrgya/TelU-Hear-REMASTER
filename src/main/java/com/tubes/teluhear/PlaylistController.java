@@ -79,7 +79,7 @@ public class PlaylistController implements Initializable {
                 controller.setPlaylistData(playlist, true);
 
                 playlistGrid.add(playlistCardView, column, row);
-                playlistGrid.setMargin(playlistCardView, new Insets(10));
+                GridPane.setMargin(playlistCardView, new Insets(10));
 
                 column++;
                 if (column >= 3) {

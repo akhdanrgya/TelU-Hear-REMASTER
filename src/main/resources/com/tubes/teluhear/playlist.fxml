@@ -11,25 +11,26 @@
 
 <StackPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dce6f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.PlaylistController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #dce6f5;">
+      <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dce6f5;">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="600.0" style="-fx-background-color: fbffd8;">
+            <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: fbffd8;">
                <children>
                   <Button fx:id="addButton" mnemonicParsing="false" onAction="#addPlaylist" style="-fx-background-radius: 20; -fx-background-color: #dce6f5;" text="Add Playlist" />
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets left="10.0" right="10.0" />
                </padding>
             </HBox>
-            <ScrollPane prefHeight="369.0" prefWidth="600.0" style="-fx-background: #dce6f5;">
+            <ScrollPane prefHeight="340.0" prefWidth="600.0" style="-fx-background: #dce6f5;">
                <content>
-                  <GridPane fx:id="playlistGrid" hgap="10.0" prefHeight="0.0" prefWidth="100.0" vgap="10.0">
+                  <GridPane fx:id="playlistGrid" alignment="CENTER" hgap="100.0" prefHeight="0.0" prefWidth="600.0" vgap="50.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                   </GridPane>
-               </content>
-            </ScrollPane>
+               </content></ScrollPane>
          </children>
       </VBox>
    </children>
