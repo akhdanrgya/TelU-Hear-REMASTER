@@ -4,10 +4,14 @@ import com.tubes.teluhear.database.dbConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import com.tubes.teluhear.database.SubsDAO;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,6 +47,24 @@ public class PremiumController implements Initializable {
     @FXML
     void premiumButton(ActionEvent event) {
         idUser = SessionManager.getInstance().getId();
+
+        // Membuka payment.fxml jika tombol Premium ditekan
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/tubes/teluhear/payment.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(loader.load());
+
+            // Mengirim idUser ke PaymentController
+            PaymentController paymentController = loader.getController();
+            paymentController.setIdUser(idUser);
+
+            stage.setScene(scene);
+            stage.setTitle("Payment");
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading payment.fxml: " + e.getMessage());
+        }
+
         try {
             subsDAO.addSubs(idUser);
             premiumLabel1.setVisible(false);
