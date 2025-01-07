@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: a3b9d9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.LoginController">
+<AnchorPane prefHeight="600.0" prefWidth="955.0" style="-fx-background-color: a3b9d9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.LoginController">
    <children>
-      <VBox prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="120.0">
+      <VBox alignment="CENTER" prefHeight="128.0" prefWidth="205.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="200.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="70.0" prefWidth="100.0">
                <children>
                   <Label text="Username">
                      <font>
@@ -23,7 +23,7 @@
                   <TextField fx:id="usernameF" maxHeight="20.0" maxWidth="200.0" prefHeight="20.0" prefWidth="200.0" promptText="Username ..." style="-fx-background-radius: 10;" />
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="70.0" prefWidth="100.0">
                <children>
                   <Label text="Password">
                      <font>
@@ -33,7 +33,7 @@
                   <PasswordField fx:id="passwordF" maxHeight="20.0" maxWidth="200.0" promptText="Password ..." style="-fx-background-radius: 10;" />
                </children>
             </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox prefHeight="30.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#Login" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Login" textFill="#274c86" />
                   <Button mnemonicParsing="false" onAction="#Register" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Register" textFill="#274c86" />

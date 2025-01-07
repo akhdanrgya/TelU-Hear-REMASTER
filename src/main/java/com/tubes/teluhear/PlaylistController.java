@@ -106,7 +106,7 @@ public class PlaylistController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Add Playlist");
-
+            stage.setResizable(false);
             stage.show();
             stage.setOnCloseRequest(event -> reloadPlaylist());
         } catch (IOException e) {
