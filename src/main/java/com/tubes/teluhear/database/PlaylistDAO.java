@@ -34,7 +34,7 @@ public class PlaylistDAO {
     }
 
     public boolean addPlaylist(PlaylistModel playlist) {
-        String sql = "INSERT INTO playlist (id_user, playlist_name) VALUES (?, ?, )";
+        String sql = "INSERT INTO playlist (id_user, playlist_name) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, playlist.getUser_id());
             stmt.setString(2, playlist.getPlaylist_name());
