@@ -5,13 +5,43 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: a3b9d9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.teluhear.LoginController">
    <children>
-      <TextField fx:id="usernameF" layoutX="226.0" layoutY="150.0" promptText="Username ..." style="-fx-background-radius: 10;" />
-      <PasswordField fx:id="passwordF" layoutX="226.0" layoutY="188.0" promptText="Password ..." style="-fx-background-radius: 10;" />
-      <Button layoutX="226.0" layoutY="228.0" mnemonicParsing="false" onAction="#Login" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Login" textFill="#274c86" />
-      <Button layoutX="315.0" layoutY="228.0" mnemonicParsing="false" onAction="#Register" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Register" textFill="#274c86" />
-      <Label fx:id="alertLabel" layoutX="226.0" layoutY="223.0" />
+      <VBox prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Username">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameF" promptText="Username ..." style="-fx-background-radius: 10;" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Password">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="passwordF" promptText="Password ..." style="-fx-background-radius: 10;" />
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#Login" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Login" textFill="#274c86" />
+                  <Button mnemonicParsing="false" onAction="#Register" style="-fx-background-color: #ffe3e9; -fx-background-radius: 20;" text="Register" textFill="#274c86" />
+               </children>
+            </HBox>
+            <Label fx:id="alertLabel" />
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
